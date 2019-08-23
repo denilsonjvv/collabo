@@ -1,0 +1,140 @@
+var express = require("express");
+var router = express.Router({ mergeParams: true });
+
+var Project = require("../models/project"), // Blog model
+  User = require("../models/user"),
+  auth = require("../config/auth"); // check if user is logged in
+
+// landing page
+router.get("/", auth.userIsLogged, function(req, res) {
+  //get all blogs
+  Project.find({}, function(err, projects) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("index", { blogs: projects, name: req.user.name }); //get variable to output in blog.ejs page
+    }
+  });
+  //render all blogs
+});
+
+//New Show Post Form
+router.get("/new", auth.userIsLogged, function(req, res) {
+  res.render("projects/new");
+});
+
+//NEW Project Create
+router.post("/", auth.userIsLogged, function(req, res) {
+  var title = req.body.title;
+  var description = req.body.description;
+  var author = {
+    id: req.user._id,
+    name: req.user.name,
+    profileImg: req.user.profileImg
+  };
+  var newProject = {
+    title: title,
+    description: description,
+    author: author
+  };
+  //Create a new blog and save to database
+
+  var project = new Project(newProject);
+
+  project.save(function(err, newProject) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/"); // index.ejs
+    }
+  });
+});
+
+//SHOW Blog Post
+router.get("/:id", auth.userIsLogged, function(req, res) {
+  //find the blog with ID
+  Blog.findById(req.params.id, function(err, foundBlog) {
+    if (err) {
+      console.log(err);
+    } else {
+      //render show template for that blog
+      res.render("blogs/show", { blog: foundBlog });
+    }
+  });
+});
+
+//EDIT your BLOG Post
+router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, function(
+  req,
+  res
+) {
+  Blog.findById(req.params.id, function(err, foundBlog) {
+    //render edit template for that blog
+    res.render("blogs/edit", { blog: foundBlog });
+  });
+});
+
+// UPDATE the Blog Post
+router.put("/:id", auth.userIsLogged, auth.checkIfOwner, function(req, res) {
+  Blog.findOneAndUpdate(req.params.id, req.body.blog, function(
+    err,
+    updatedBlog
+  ) {
+    if (err) {
+      res.redirect("/");
+    } else {
+      res.redirect("/" + req.params.id);
+    }
+  });
+});
+
+//DESTROY Blog Post
+router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, function(req, res) {
+  Blog.findOneAndDelete(req.params.id, function(err) {
+    if (err) {
+      res.redirect("/");
+    } else {
+      res.redirect("/");
+    }
+  });
+});
+
+//Global Router
+module.exports = router;
+
+//Image Upload Backup for BLOG POST
+
+// //Header Image Upload Setup W/ CLOUDINARY
+// cloudinary.config({
+//     cloud_name: "denilsonjvv",
+//     api_key: "953329937682181",
+//     api_secret: "rGY1FMRd4b_qoHPQ_0OCjZcHSm4"
+// });
+// const storage = cloudinaryStorage({
+//     cloudinary: cloudinary,
+//     folder: "blogHeader",
+//     allowedFormats: ["jpg", "png"],
+//     transformation: [{ width: 1000, height: 1000, crop: "limit" }]
+// });
+// const parser = multer({ storage: storage });
+
+//Create Blog Post WITH IMAGE TESTING STAGE / CLOUDINARY:
+// router.post("/", userIsLogged, parser.single("fileURL"), function (req, res) {
+//     var title = req.body.title;
+//     var fileURL = req.file.url;
+//     var description = req.body.description;
+//     var author = {
+//         id: req.user._id,
+//         name: req.user.name
+//     };
+//     var newBlog = { title: title, fileURL: fileURL, description: description, author: author };
+//     //Create a new blog and save to database
+//     Blog.create(newBlog, function (err, newlyCreated) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             res.redirect("/"); // index.ejs
+//             console.log(newlyCreated);
+//         }
+//     });
+// });

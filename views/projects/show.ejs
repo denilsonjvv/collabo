@@ -1,0 +1,45 @@
+<% include ../partials/header %>
+
+<% include ../partials/messages %>
+
+<div class="main post">
+    <div class="blog-area">
+        <div class="header">
+            <img src="images/<%= blog.fileURL %>">
+        </div>
+        <div class="body">
+            <h1><%= blog.title %></h1>
+            <div class="author">
+                <div class="info">
+                    <a href="/profile/<%= blog.author.id %>"><img src="pro-img/<%= blog.author.profileImg %>"></a>
+                    <div class="data">
+                        <p id="name"><%= blog.author.name %></p>
+                        <p> Posted <%= blog.date.toDateString() %></p>
+                    </div>
+                </div>
+            </div>
+            <hr class="line"/>
+            <div class="post">
+                <p class="desc"></p>
+                <div class="hiddenEl" style="display:none;">
+                    <%= blog.description %>
+                </div>
+            </div>
+            <hr class="line"/>
+            <% if(currentUser && blog.author.id.equals(currentUser._id)){ %>
+                <div class="show-tools">
+                    <a href="/<%= blog._id %>/edit"><button>Edit this post</button></a>
+                    <form action="/<%= blog._id %>?_method=DELETE" method="POST">
+                        <button>Delete</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="about-area">
+        <h1>About:</h1>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>

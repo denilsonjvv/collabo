@@ -1,0 +1,63 @@
+.post .header {
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+  border-radius: 2px; }
+.post img {
+  width: 100%; }
+.post .body {
+  display: flex;
+  flex-direction: column; }
+  .post .body h1 {
+    color: #333;
+    font-size: 33px;
+    line-height: 1.2; }
+  .post .body .show-tools {
+    display: flex;
+    flex-direction: row; }
+    .post .body .show-tools form button,
+    .post .body .show-tools a button {
+      background-color: white;
+      border: 1px solid #ff00d4;
+      color: #333;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 2px;
+      margin: 0 3px;
+      cursor: pointer; }
+  .post .body .post {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444; }
+    .post .body .post p {
+      color: #444; }
+  .post .body .author {
+    display: flex;
+    flex-direction: row; }
+    .post .body .author .info {
+      display: flex;
+      flex-direction: row;
+      cursor: default; }
+      .post .body .author .info img {
+        border-radius: 2px;
+        width: 46px;
+        height: 46px; }
+      .post .body .author .info .data {
+        padding: 0 10px; }
+        .post .body .author .info .data #name {
+          font-size: 13px;
+          text-transform: uppercase;
+          color: #4e4e4e;
+          font-weight: 600;
+          padding-bottom: 10px;
+          cursor: pointer; }
+        .post .body .author .info .data p {
+          font-size: 12px;
+          margin: 0;
+          color: #bdbdbd; }
+
+@media only screen and (min-width: 1300px) {
+  .post,
+  .main {
+    width: 1200px; } }

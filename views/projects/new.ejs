@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1>Project Post</h1>
+    <hr class="line">
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <div class="block">
+          <label for="name">Title</label>
+          <input type="text" id="title" name="title" aria-describedby="title" placeholder="...">
+      </div>
+      <div class="block">
+        <label for="description">Description:</label>
+        <textarea type="text" id="description" name="description" placeholder="Post Description"></textarea>
+      </div>
+      <button>Submit</button>
+    </form>
+</div>
+
+<% include ../partials/footer %>

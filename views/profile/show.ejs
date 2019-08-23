@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<% include ../partials/messages %>
+
+
+<div class="pro-container">
+    <div class="wrap">
+        <div class="profile-head">
+            <div class="left-hold">
+                <div class="img-hold">
+                    <img src="/pro-img/<%= user.profileImg %>">
+                </div>
+                <a class="btn btn-primary btn-sm" href="/profile/<%= user.id %>/edit">Edit Profile</a>
+            </div>
+            <div class="info-hold">
+                <h3>
+                <%= user.name %>
+                </h3>
+                <hr class="line"/>
+                <p><b>Email: </b><%= user.email %></p>
+                <p><b>Registered Since: </b><%= user.date.toDateString() %></p>
+                <h3>Published blogs:</h3>
+                <hr class="line"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%  include ../partials/footer %>

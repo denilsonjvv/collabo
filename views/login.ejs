@@ -1,0 +1,25 @@
+<% include partials/header %>
+
+  <div class="form-contain">
+    <div class="header"> 
+      <h1>Nathalie's Blog ;D</h1>
+      <hr class="line"/>
+      <% include ./partials/messages %>
+      <form action="/user/login" method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text"  id="email"  name="username"  class="form-control"  placeholder="Enter Email"/>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p>
+        No Account? <a href="/user/register">Register</a>
+      </p>
+    </div>
+  </div>
+
+<% include partials/footer %>

@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
+@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+/* string import */
+@import "./index.css";
+@import "./blog.css";
+@import "./profile.css";
+
+/* Root Colors */
+:root {
+  --pink: #ff49df;
+  --lightgrey: #f7f7f7;
+}
+/* Font Links */
+/* Normalize and Config */
+body {
+  font-family: "Open Sans", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+a:active {
+  color: inherit;
+}
+form input:focus,
+form button:focus {
+  outline: none;
+}
+hr.line {
+  width: 100%;
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.container {
+  position: relative;
+  width: 900px;
+  margin: 0 auto;
+}
+nav {
+  width: 100%;
+  margin: 10px 0;
+}
+nav .navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+nav .navigation a {
+  color: #333;
+}
+nav .navigation ul.nav-list {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+nav .navigation ul.nav-list li {
+  list-style: none;
+  border-left: 1px solid #e8e8e8;
+}
+nav .navigation ul.nav-list li a {
+  display: inline-block;
+  color: #333;
+  padding: 20px;
+}
+/* Error handling */
+.msg {
+  margin: 10px auto;
+  padding: 8px;
+  font-size: 14px;
+}
+.err_msg {
+  background: #ffbaa5;
+  border: 1px solid #ff9679;
+  color: #ce4b2c;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+.suc_msg {
+  background: #b0f1a0;
+  border: 1px solid #76d000;
+  color: #33a717;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+.info_msg {
+  background: #ffe7a5;
+  border: 1px solid #e6bf00;
+  color: #9a7612;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Main CSS */
+
+#updates {
+  position: relative;
+  padding: 25px;
+  margin: 10px 0;
+  background-color: #eee;
+  border: 3px solid #ccc;
+}
+
+section h3 {
+  color: #8f8f8f;
+}
+#updates .upd {
+  display: inline-block;
+  background-color: white;
+  color: #70c6ff;
+  padding: 5px;
+  margin: 10px 0;
+  font-size: 15px;
+}
+#updates .inquiry {
+  padding: 15px;
+  background-color: #70c6ff;
+  color: white;
+}

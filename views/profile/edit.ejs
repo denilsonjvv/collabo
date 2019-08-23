@@ -1,0 +1,66 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="pro-container">
+        <div class="wrap">
+            <div class="profile-head">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="left-hold">
+                        <div class="img-hold">
+                            <img src="/pro-img/<%= user.profileImg %>">
+                        </div>
+                    </div>
+                    <div class="info-hold">
+                        <div class="msg suc_msg d-none">
+                            Profile Updated!
+                        </div>
+                        <h3>
+                        Edit your profile
+                        </h3>
+                        <hr class="line"/>
+                        <p>
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" aria-describedby="name" placeholder="Your name"/>
+                        </p>
+                        <p>
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" value="<%= user.email %>" placeholder="Email">
+                        </p>
+                        <a id="saveButton" href='javascript:void(0)' disabled="false" data-userid="<%= user._id %>">Save</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    $(function() {
+        $("#saveButton").on('click', function () {
+                var id = $(this).data("userid");
+                var msg = $(".msg");
+                var data = {
+                    name: $("#name").val(),
+                    email: $("#email").val()
+                }
+                $.ajax({
+                    method: "PUT",
+                    url: '/profile/' + id + "?_method=PUT",
+                    data: data
+                }).done(function(data){
+                    msg.removeClass("d-none");
+                    function removeMsg(){
+                        msg.addClass("d-none");
+                    }
+                    setTimeout(removeMsg, 4000);
+                }).fail(function(err){
+                    console.log("Oops not working" + err);
+                });
+            });
+    });
+</script>
+
+
+<% include ../partials/footer %>  
