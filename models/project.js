@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-// BLOG SCHEMA SETUP
+//SCHEMA SETUP
 var projectSchema = new mongoose.Schema({
   title: String,
   description: String,
