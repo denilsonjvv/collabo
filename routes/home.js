@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router({ mergeParams: true });
 
-var Project = require("../models/project"), // Blog model
+var Project = require("../models/project"),
   User = require("../models/user"),
-  auth = require("../config/auth"); // check if user is logged in
+  auth = require("../config/auth"); // connect to auth file to authorize.
 
-// landing page
+// Landing page
 router.get("/", auth.userIsLogged, function(req, res) {
-  //get all blogs
   Project.find({}, function(err, projects) {
     if (err) {
       console.log(err);
@@ -15,7 +14,6 @@ router.get("/", auth.userIsLogged, function(req, res) {
       res.render("index", { blogs: projects, name: req.user.name }); //get variable to output in blog.ejs page
     }
   });
-  //render all blogs
 });
 
 //New Show Post Form
