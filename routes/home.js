@@ -11,7 +11,7 @@ router.get("/", auth.userIsLogged, function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render("index", { blogs: projects, name: req.user.name }); //get variable to output in blog.ejs page
+      res.render("index", { projects: projects, name: req.user.name }); //get variable to output in blog.ejs page
     }
   });
 });
@@ -36,69 +36,74 @@ router.post("/", auth.userIsLogged, function(req, res) {
     author: author
   };
   //Create a new blog and save to database
-
-  var project = new Project(newProject);
-
-  project.save(function(err, newProject) {
+  Project.create(newProject, function(err, newlyCreated) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/"); // index.ejs
+      res.redirect("/"); //redirect back to campgrounds page
     }
   });
 });
 
-//SHOW Blog Post
+//SHOW project page
 router.get("/:id", auth.userIsLogged, function(req, res) {
-  //find the blog with ID
-  Blog.findById(req.params.id, function(err, foundBlog) {
-    if (err) {
-      console.log(err);
-    } else {
-      //render show template for that blog
-      res.render("blogs/show", { blog: foundBlog });
-    }
-  });
-});
-
-//EDIT your BLOG Post
-router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, function(
-  req,
-  res
-) {
-  Blog.findById(req.params.id, function(err, foundBlog) {
-    //render edit template for that blog
-    res.render("blogs/edit", { blog: foundBlog });
-  });
-});
-
-// UPDATE the Blog Post
-router.put("/:id", auth.userIsLogged, auth.checkIfOwner, function(req, res) {
-  Blog.findOneAndUpdate(req.params.id, req.body.blog, function(
-    err,
-    updatedBlog
-  ) {
-    if (err) {
-      res.redirect("/");
-    } else {
-      res.redirect("/" + req.params.id);
-    }
-  });
-});
-
-//DESTROY Blog Post
-router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, function(req, res) {
-  Blog.findOneAndDelete(req.params.id, function(err) {
-    if (err) {
-      res.redirect("/");
-    } else {
-      res.redirect("/");
-    }
+  Project.findById(req.params.id, function(req, foundProject) {
+    res.render("projects/show", { project: foundProject });
   });
 });
 
 //Global Router
 module.exports = router;
+
+//     -HELPFUL NOTES
+// //SHOW Blog Post
+// router.get("/:id", auth.userIsLogged, function(req, res) {
+//   //find the blog with ID
+//   Project.findById(req.params.id, function(err, foundProject) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       //render show template for that blog
+//       res.render("projects/show", { project: foundProject });
+//     }
+//   });
+// });
+
+// //EDIT your BLOG Post
+// router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, function(
+//   req,
+//   res
+// ) {
+//   Blog.findById(req.params.id, function(err, foundBlog) {
+//     //render edit template for that blog
+//     res.render("blogs/edit", { blog: foundBlog });
+//   });
+// });
+
+// // UPDATE the Blog Post
+// router.put("/:id", auth.userIsLogged, auth.checkIfOwner, function(req, res) {
+//   Blog.findOneAndUpdate(req.params.id, req.body.blog, function(
+//     err,
+//     updatedBlog
+//   ) {
+//     if (err) {
+//       res.redirect("/");
+//     } else {
+//       res.redirect("/" + req.params.id);
+//     }
+//   });
+// });
+
+// //DESTROY Blog Post
+// router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, function(req, res) {
+//   Blog.findOneAndDelete(req.params.id, function(err) {
+//     if (err) {
+//       res.redirect("/");
+//     } else {
+//       res.redirect("/");
+//     }
+//   });
+// });
 
 //Image Upload Backup for BLOG POST
 

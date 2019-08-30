@@ -2,8 +2,17 @@
 
 <div class="container">
 <h1>collabO</h1>
-    <section id="updates">
-        <h3>Updates</h3>
+    <section class="greybox" id="activeproj">
+        <h3>Active Projects</h3>
+        <hr class="line">
+            <% projects.forEach(function(project){ %>
+            <button class="prjhold">
+                <a href="<%= project._id%>"><%= project.title %></a>
+            </button>   
+            <% });%>
+    </section>
+    <section class="greybox" id="updates">
+        <h3>Updates Dummy Info</h3>
         <hr class="line"/>
         <span class="upd">Last Update: 18 hours ago</span>
         <div class="inquiry">
@@ -13,12 +22,7 @@
             <p>Jacob completed inquiry #4521 in project Team Project Admin</p>
         </div>
     </section>
-    <section id="act-proj">
-        <h3>Active Project</h3>
-        <div class="prjct">
-            <p>Team Project Admin</p>
-        </div>
-    </section>
+    <a href="/new">NEW PROJECT</a>
 </div>
 
 

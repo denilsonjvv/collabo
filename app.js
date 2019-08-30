@@ -19,7 +19,7 @@ const indexRoutes = require("./routes/index"),
 mongoose.connect("mongodb://localhost/collabotest", { useNewUrlParser: true });
 
 //allows express to track files as .ejs
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -56,20 +56,6 @@ app.use((req, res, next) => {
 app.use("/user", indexRoutes); //login and register
 app.use(homeRoutes); // show blogs, edit, etc.
 app.use("/profile", profileRoutes);
-//creates new blog
-// Blog.create(
-//     {
-//         title: "My First Blog!",
-//         image: "http://www.freeimageslive.com/galleries/nature/animals/pics/cat02151.jpg",
-//         description: "I love cats, blah blah blaaah!"
-//     }, function (err, blog) {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             console.log("newly created campground!");
-//             console.log(blog);
-//         }
-//     });
 
 //-----------------LISTENING TO APP SERVER
 const hostname = "127.0.0.1";
@@ -77,3 +63,23 @@ const port = 3000;
 app.listen(port, hostname, () => {
   console.log(`Server running: http://${hostname}:${port}/`);
 });
+
+//creates new schema
+// Project.create(
+//   {
+//     title: "My First Blog!",
+//     description: "I love cats, blah blah blaaah!",
+//     author: {
+//       name: "Denilson",
+//       profileImg: "proImage.png"
+//     }
+//   },
+//   function(err, project) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("newly created campground!");
+//       console.log(project);
+//     }
+//   }
+// );

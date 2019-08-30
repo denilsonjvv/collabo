@@ -99,7 +99,7 @@ nav .navigation ul.nav-list li a {
 
 /* Main CSS */
 
-#updates {
+.greybox {
   position: relative;
   padding: 25px;
   margin: 10px 0;
@@ -122,4 +122,21 @@ section h3 {
   padding: 15px;
   background-color: #70c6ff;
   color: white;
+}
+
+#activeproj .prjct {
+  display: inline-block;
+}
+
+#activeproj button {
+  background-color: rgb(43, 223, 124);
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+#activeproj button a {
+  display: inline-block;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
 }
