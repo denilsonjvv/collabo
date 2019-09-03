@@ -5,7 +5,7 @@ middlewareObj.userIsLogged = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    req.flash("info_msg", "Please log in to view this resource.");
+    req.flash("info_msg", "Please log in to view this resource");
     res.redirect("/user/login");
   }
 };
@@ -30,8 +30,8 @@ middlewareObj.checkIfOwner = function(req, res, next) {
       }
     });
   } else {
-    res.redirect("back");
     req.flash("info_msg", "You must be logged in to access this page.");
+    res.redirect("back");
   }
 };
 

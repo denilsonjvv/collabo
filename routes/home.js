@@ -3,13 +3,14 @@ var router = express.Router({ mergeParams: true });
 
 var Project = require("../models/project"),
   User = require("../models/user"),
+  Task = require("../models/task"),
   auth = require("../config/auth"); // connect to auth file to authorize.
 
 // Landing page
 router.get("/", auth.userIsLogged, function(req, res) {
   Project.find({}, function(err, projects) {
     if (err) {
-      console.log(err);
+      console.log("Landing page error");
     } else {
       res.render("index", { projects: projects, name: req.user.name }); //get variable to output in blog.ejs page
     }
@@ -38,7 +39,7 @@ router.post("/", auth.userIsLogged, function(req, res) {
   //Create a new blog and save to database
   Project.create(newProject, function(err, newlyCreated) {
     if (err) {
-      console.log(err);
+      console.log("Trouble creating project error");
     } else {
       res.redirect("/"); //redirect back to campgrounds page
     }
@@ -46,9 +47,73 @@ router.post("/", auth.userIsLogged, function(req, res) {
 });
 
 //SHOW project page
-router.get("/:id", auth.userIsLogged, function(req, res) {
-  Project.findById(req.params.id, function(req, foundProject) {
-    res.render("projects/show", { project: foundProject });
+router.get("/p/:id", auth.userIsLogged, function(req, res) {
+  Project.findById(req.params.id)
+    .populate("tasks")
+    .exec(function(err, foundProject) {
+      if (err) {
+        console.log("Show project page error.");
+      } else {
+        res.render("projects/show", { project: foundProject });
+      }
+    });
+});
+
+// New task page
+router.get("/p/:id/new", auth.userIsLogged, function(req, res) {
+  Project.findById(req.params.id, function(err, foundProject) {
+    if (err) {
+      console.log("Take back with err msg");
+    } else {
+      User.find({}, function(err, foundUsers) {
+        res.render("tasks/new", { project: foundProject, user: foundUsers });
+      });
+    }
+  });
+});
+
+// Create new task
+router.post("/p/:id", auth.userIsLogged, function(req, res) {
+  var task = req.body.task;
+  var usersAsgnd = req.body.assigned;
+  var assigned = {
+    name: req.body.assigned,
+    profileImg: "defaultProImage.png"
+  };
+  var priority = req.body.priority;
+  var dueDate = req.body.dueDate;
+  var project = {
+    id: req.params.id
+  };
+  var createdby = {
+    id: req.user._id,
+    name: req.user.name,
+    profileImg: req.user.profileImg
+  };
+  var newTask = {
+    task: task,
+    assigned: assigned,
+    priority: priority,
+    dueDate: dueDate,
+    project: project,
+    createdby: createdby
+  };
+  Project.findById(req.params.id, function(err, foundProject) {
+    if (err) {
+      console.log("project ID not found error.");
+      res.redirect("/");
+    } else {
+      Task.create(newTask, function(err, newTask) {
+        if (err) {
+          console.log("Task not found error.");
+        } else {
+          foundProject.tasks.push(newTask);
+          foundProject.save();
+          console.log(newTask);
+          res.redirect("/p/" + foundProject._id); //redirect back to campgrounds page
+        }
+      });
+    }
   });
 });
 

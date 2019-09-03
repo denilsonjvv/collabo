@@ -5,6 +5,14 @@
 @import "./blog.css";
 @import "./profile.css";
 
+@font-face {
+  font-family: "SF Mono Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("SF Mono Regular"),
+    url("./fonts/SFMonoRegular.woff") format("woff");
+}
+
 /* Root Colors */
 :root {
   --pink: #ff49df;
@@ -17,6 +25,37 @@ body {
   padding: 0;
   margin: 0;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 10px 0;
+  margin: 2px 0;
+}
+h1 {
+  font-size: 1.6em;
+}
+h2 {
+  font-size: 1.4em;
+}
+h3 {
+  font-size: 1.25em;
+}
+h4 {
+  font-size: 1.1em;
+}
+h5 {
+  font-size: 0.97em;
+}
+h6 {
+  font-size: 0.85em;
+}
+p {
+  font-size: 1em;
+  margin: 10px 0;
+}
 a {
   text-decoration: none;
 }
@@ -27,6 +66,19 @@ form input:focus,
 form button:focus {
   outline: none;
 }
+button.btnlink {
+  color: white;
+  background: #3ae4a5;
+  border: 1px solid #00a05e;
+  padding: 5px;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button.btnlink a {
+  color: inherit;
+}
+/*Small Hacks*/
 hr.line {
   width: 100%;
   border: 0;
@@ -34,9 +86,14 @@ hr.line {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
+.ctr {
+  text-align: center;
+}
+
+/* Start */
 .container {
   position: relative;
-  width: 900px;
+  width: 600px;
   margin: 0 auto;
 }
 nav {
@@ -98,18 +155,25 @@ nav .navigation ul.nav-list li a {
 }
 
 /* Main CSS */
+/* Font for digits */
+.digit {
+  font-family: "SF Mono Regular";
+  font-size: 0.7em;
+  color: #007eff;
+  background-color: white;
+  padding: 0px 3px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
 
 .greybox {
   position: relative;
-  padding: 25px;
+  padding: 15px;
   margin: 10px 0;
   background-color: #eee;
-  border: 3px solid #ccc;
+  border-radius: 5px;
 }
 
-section h3 {
-  color: #8f8f8f;
-}
 #updates .upd {
   display: inline-block;
   background-color: white;
@@ -126,17 +190,4 @@ section h3 {
 
 #activeproj .prjct {
   display: inline-block;
-}
-
-#activeproj button {
-  background-color: rgb(43, 223, 124);
-  border: 1px solid #eee;
-  border-radius: 5px;
-}
-#activeproj button a {
-  display: inline-block;
-  padding: 10px;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
 }

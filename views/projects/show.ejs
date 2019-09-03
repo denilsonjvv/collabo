@@ -2,11 +2,33 @@
 
 <% include ../partials/messages %>
  
+<div class="container">
 <section class="greybox">
-    <h1>Project Page Information/ Updates - ID <%= project._id %></h1>
-    <hr class="line"/>
-    <h2><%= project.title %></h2>
+    <span class="digit"> ID <%=project._id%> </span>
+    <hr class="line"/> 
+    <h3><%= project.title %></h3>
     <p><%= project.description %></p>
 </section>
+<section class="greybox">
+    <h3 class="ctr">Tasks</h3>
+    <hr class="line"/>
+    <button class="btnlink"><a href="/p/<%= project._id %>/new">Add Task</a></button>
+    <% project.tasks.forEach(function(task){ %>
+    <div class="taskbox">
+        <h5><%= task.task %></h5>
+        <span class="priority" id="priohigh"><%= task.priority %></span>
+        
+        <div class="grpAssigned">
+        <%  task.assigned.forEach(function( assigned){ %>
+                <span class="assigned"><%= assigned.name %></span>
+        <%  }); %>
+
+        </div>
+        <span class="dueDate"><%= task.dueDate%></span>
+        <span class="dueDate">By: <%= task.createdby.name %></span>
+    </div>
+    <% }); %>
+</section>
+</div>
 
 <% include ../partials/footer %>

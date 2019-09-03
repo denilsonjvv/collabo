@@ -15,7 +15,6 @@ const indexRoutes = require("./routes/index"),
 
 //Passport config
 // require("./config/passport")(passport);
-
 mongoose.connect("mongodb://localhost/collabotest", { useNewUrlParser: true });
 
 //allows express to track files as .ejs
@@ -33,13 +32,6 @@ app.use(
     saveUninitialized: false
   })
 );
-//Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 //Connect flash messages
 app.use(flash());
 //Global vars
@@ -52,14 +44,21 @@ app.use((req, res, next) => {
   next();
 });
 
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //Locate Routes
 app.use("/user", indexRoutes); //login and register
-app.use(homeRoutes); // show blogs, edit, etc.
+app.use(homeRoutes); //  "/"
 app.use("/profile", profileRoutes);
 
 //-----------------LISTENING TO APP SERVER
 const hostname = "127.0.0.1";
-const port = 3000;
+const port = 4000;
 app.listen(port, hostname, () => {
   console.log(`Server running: http://${hostname}:${port}/`);
 });

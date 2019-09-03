@@ -6,8 +6,8 @@
         <h3>Active Projects</h3>
         <hr class="line">
             <% projects.forEach(function(project){ %>
-            <button class="prjhold">
-                <a href="<%= project._id%>"><%= project.title %></a>
+            <button class="btnlink">
+                <a href="/p/<%= project._id%>"><%= project.title %></a>
             </button>   
             <% });%>
     </section>

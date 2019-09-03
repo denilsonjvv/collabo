@@ -1,16 +1,19 @@
 var mongoose = require("mongoose");
 
 //SCHEMA SETUP
-var projectSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  tasks: [
+var taskSchema = new mongoose.Schema({
+  task: String,
+  assigned: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Task" //Data from User model schema
+      name: String
+    },
+    {
+      profileImg: String
     }
   ],
-  author: {
+  priority: String,
+  dueDate: String,
+  createdby: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User" //Data from User model schema
@@ -25,4 +28,4 @@ var projectSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Project", projectSchema); // Needed evertime we require mongoose
+module.exports = mongoose.model("Task", taskSchema); // Needed evertime we require mongoose

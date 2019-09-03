@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1>New Task in [<%= project.title %>]</h1>
+    <span>(Project ID <%=project._id%>)</span>
+    <hr class="line">
+    <form action="/p/<%= project._id %>" method="POST">
+      <div class="block">
+          <label for="task">Task</label>
+          <textarea type="text" id="task" name="task" aria-describedby="task"></textarea>
+      </div>
+      <div class="block">
+          <label for="priority">Priority</label><br>
+          <input type="checkbox" id="priority" name="priority" value="Low" aria-describedby="assigned">Low<br>
+          <input type="checkbox" id="priority" name="priority" value="Medium" aria-describedby="assigned">Medium<br>
+          <input type="checkbox" id="priority" name="priority" value="High" aria-describedby="assigned">High<br>
+      </div>
+      <hr class="line"/>
+      <div class="block">
+          <label for="assigned">Assign To</label>
+          <% user.forEach(function(user){ %>
+            <input type="checkbox" id="assigned" name="assigned" value="<%= user.name %>" aria-describedby="assigned"><%= user.name %></input>
+          <% }); %>
+      </div>
+      <div class="block">
+          <label for="dueDate">Due </label>
+          <input type="text" id="dueDate" name="dueDate">
+      </div>
+      <button>Submit</button>
+    </form>
+</div>
+
+<% include ../partials/footer %>
