@@ -3,14 +3,7 @@ var mongoose = require("mongoose");
 //SCHEMA SETUP
 var taskSchema = new mongoose.Schema({
   task: String,
-  assigned: [
-    {
-      name: String
-    },
-    {
-      profileImg: String
-    }
-  ],
+  assigned: Array,
   priority: String,
   dueDate: String,
   createdby: {

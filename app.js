@@ -1,9 +1,10 @@
-const express = require("express"),
-  app = express(),
-  flash = require("connect-flash"),
-  cookieParser = require("cookie-parser"),
-  mongoose = require("mongoose"),
+const mongoose = require("mongoose"),
   session = require("express-session"),
+  express = require("express"),
+  app = express();
+const MongoStore = require("connect-mongo")(session);
+const flash = require("connect-flash"),
+  cookieParser = require("cookie-parser"),
   passport = require("passport"),
   bodyParser = require("body-parser"),
   LocalStrategy = require("passport-local"),
@@ -15,7 +16,15 @@ const indexRoutes = require("./routes/index"),
 
 //Passport config
 // require("./config/passport")(passport);
-mongoose.connect("mongodb://localhost/collabotest", { useNewUrlParser: true });
+mongoose.connect(
+  "mongodb://localhost/collabo",
+  { useNewUrlParser: true },
+  function(err) {
+    if (err) {
+      console.log(err);
+    }
+  }
+);
 
 //allows express to track files as .ejs
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,12 +37,19 @@ app.use(methodOverride("_method")); // allows PUT and DELETE as a post request
 app.use(
   session({
     secret: "Team Management",
-    resave: true,
-    saveUninitialized: false
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
 //Connect flash messages
 app.use(flash());
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 //Global vars
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
@@ -43,14 +59,6 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
-
-//Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 //Locate Routes
 app.use("/user", indexRoutes); //login and register
 app.use(homeRoutes); //  "/"

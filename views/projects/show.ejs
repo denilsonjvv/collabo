@@ -4,7 +4,7 @@
  
 <div class="container">
 <section class="greybox">
-    <span class="digit"> ID <%=project._id%> </span>
+    <span class="digit"> ID <%=project.id%> </span>
     <hr class="line"/> 
     <h3><%= project.title %></h3>
     <p><%= project.description %></p>
@@ -19,9 +19,14 @@
         <span class="priority" id="priohigh"><%= task.priority %></span>
         
         <div class="grpAssigned">
-        <%  task.assigned.forEach(function( assigned){ %>
-                <span class="assigned"><%= assigned.name %></span>
-        <%  }); %>
+        <%  
+            var asgdUsers = task.assigned; 
+            var i;
+            for (i = 0; i < asgdUsers.length; i++) { 
+        %>
+                <span class="assigned"><%= asgdUsers[i] %></span>
+            
+        <%  } %>
 
         </div>
         <span class="dueDate"><%= task.dueDate%></span>

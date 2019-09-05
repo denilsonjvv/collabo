@@ -23,8 +23,15 @@
     <nav>
       <div class="navigation">
         <ul class="nav-list">
+          <% if(currentUser){ %>
+            <li class="digit"style="font-family: 'SF Mono Regular';">Logged In As <%= currentUser.name %></li>
+          <% }else{ %>
+                <li class="digit"style="font-family: 'SF Mono Regular';">No user logged in</li>
+          <% } %>
           <li><a href="/">Home</a></li>
-          <li><a href="/admin">Admin</a></li>
+          <li><a href="/profile">Admin</a></li>
+          <li><a href="/user/logout">Logout</a></li>
+          <li><a href="/user/login">Login</a></li>
         </ul>
       </div>
     </nav>

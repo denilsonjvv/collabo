@@ -75,11 +75,7 @@ router.get("/p/:id/new", auth.userIsLogged, function(req, res) {
 // Create new task
 router.post("/p/:id", auth.userIsLogged, function(req, res) {
   var task = req.body.task;
-  var usersAsgnd = req.body.assigned;
-  var assigned = {
-    name: req.body.assigned,
-    profileImg: "defaultProImage.png"
-  };
+  var assigned = req.body.assigned;
   var priority = req.body.priority;
   var dueDate = req.body.dueDate;
   var project = {
@@ -103,13 +99,13 @@ router.post("/p/:id", auth.userIsLogged, function(req, res) {
       console.log("project ID not found error.");
       res.redirect("/");
     } else {
-      Task.create(newTask, function(err, newTask) {
+      Task.create(newTask, function(err, foundTask) {
         if (err) {
           console.log("Task not found error.");
         } else {
-          foundProject.tasks.push(newTask);
+          foundProject.tasks.push(foundTask);
           foundProject.save();
-          console.log(newTask);
+          console.log(foundTask);
           res.redirect("/p/" + foundProject._id); //redirect back to campgrounds page
         }
       });

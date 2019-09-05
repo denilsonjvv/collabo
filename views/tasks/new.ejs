@@ -11,15 +11,19 @@
       </div>
       <div class="block">
           <label for="priority">Priority</label><br>
-          <input type="checkbox" id="priority" name="priority" value="Low" aria-describedby="assigned">Low<br>
-          <input type="checkbox" id="priority" name="priority" value="Medium" aria-describedby="assigned">Medium<br>
-          <input type="checkbox" id="priority" name="priority" value="High" aria-describedby="assigned">High<br>
+          <select id="priority" name="priority">
+            <option value="Low" value="Low">Low</option>
+            <option value="Medium" value="Medium">Medium</option>
+            <option value="High" value="High">High</option>
+          </select>
       </div>
       <hr class="line"/>
       <div class="block">
           <label for="assigned">Assign To</label>
           <% user.forEach(function(user){ %>
-            <input type="checkbox" id="assigned" name="assigned" value="<%= user.name %>" aria-describedby="assigned"><%= user.name %></input>
+            <input type="checkbox" id="assigned" name="assigned" value="<%= user.name %>" aria-describedby="assigned">
+                <%= user.name %>
+            </input>
           <% }); %>
       </div>
       <div class="block">
