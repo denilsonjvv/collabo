@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
-@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+@import url("https://fonts.googleapis.com/css?family=Asap:400,600&display=swap");
 /* string import */
 @import "./index.css";
 @import "./blog.css";
@@ -25,7 +25,7 @@
 /* Font Links */
 /* Normalize and Config */
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Asap", "Open Sans", sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -40,21 +40,27 @@ h6 {
 }
 h1 {
   font-size: 1.6em;
+  font-weight: 100;
 }
 h2 {
   font-size: 1.4em;
+  font-weight: 100;
 }
 h3 {
   font-size: 1.25em;
+  color: #232323;
 }
 h4 {
   font-size: 1.1em;
+  color: #232323;
 }
 h5 {
   font-size: 0.97em;
+  color: #232323;
 }
 h6 {
   font-size: 0.85em;
+  color: #232323;
 }
 p {
   font-size: 1em;
@@ -66,30 +72,40 @@ a {
 a:active {
   color: inherit;
 }
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  opacity: 0.8;
+}
 form input:focus,
 form button:focus {
   outline: none;
 }
 button.btnlink {
+  font-family: "SF Mono Regular";
+  font-size: 0.7em;
   color: #007eff;
   background: white;
-  border: 1px solid #a7a7a7;
-  padding: 5px;
+  border: 1px solid #ffffff;
   border-radius: 3px;
-  font-weight: bold;
   cursor: pointer;
+  text-transform: uppercase;
 }
 button.bluelink {
   color: white;
   background: #43c2ff;
   border: 1px solid #007ed8;
-  padding: 5px;
   border-radius: 3px;
-  cursor: pointer;
 }
-
+button {
+  padding: 0;
+}
 button a {
   color: inherit;
+  padding: 2px 5px;
+  display: inline-block;
 }
 /*Small Hacks*/
 hr.line {
@@ -97,11 +113,22 @@ hr.line {
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.fl {
+  float: left;
 }
 .ctr {
   text-align: center;
 }
+.clearfix {
+  overflow: auto;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/* https://www.w3schools.com/howto/howto_css_clearfix.asp */
 
 /* Start */
 .container {
@@ -110,20 +137,23 @@ hr.line {
   margin: 0 auto;
 }
 nav {
-  width: 100%;
-  margin: 10px 0;
+  position: relative !important;
+  background-color: #313850;
+}
+#logged {
+  background-color: #394367;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0 10px;
 }
 nav .navigation {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  width: 100%;
-  border-top: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
 }
 nav .navigation a {
-  color: #333;
+  color: white;
 }
 nav .navigation ul.nav-list {
   display: flex;
@@ -132,12 +162,11 @@ nav .navigation ul.nav-list {
 }
 nav .navigation ul.nav-list li {
   list-style: none;
-  border-left: 1px solid #e8e8e8;
 }
 nav .navigation ul.nav-list li a {
   display: inline-block;
-  color: #333;
-  padding: 20px;
+  padding: 10px;
+  font-size: 0.9em;
 }
 /* Error handling */
 .msg {
@@ -173,7 +202,6 @@ nav .navigation ul.nav-list li a {
   font-family: "SF Mono Regular";
   font-size: 0.7em;
   color: #007eff;
-  background-color: white;
   padding: 0px 3px;
   border-radius: 3px;
   text-transform: uppercase;
@@ -183,6 +211,6 @@ nav .navigation ul.nav-list li a {
   position: relative;
   padding: 15px;
   margin: 10px 0;
-  background-color: #eee;
+  background-color: #f3f3f3;
   border-radius: 5px;
 }
