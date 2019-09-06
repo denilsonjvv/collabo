@@ -21,14 +21,19 @@
   </head>
   <body>
     <nav>
+        <div id="logged"class="fl clearfix">
+          <% if(currentUser){ %>
+            <span class="digit sfFont">
+              <a href="/profile/<%= currentUser._id %>">
+                Logged In As <%= currentUser.name %> - ID <%= currentUser._id %>
+              </a>
+            </span>
+          <% }else{ %>
+                <span class="digit sfFont">No user logged in</span>
+          <% } %>
+        </div>
       <div class="navigation">
         <ul class="nav-list">
-          <% if(currentUser){ %>
-            <li class="digit sfFont">Logged In As <%= currentUser.name %></li>
-            <li><a href="/profile/<%= currentUser._id %>">Profile</a></li>
-          <% }else{ %>
-                <li class="digit sfFont">No user logged in</li>
-          <% } %>
           <li><a href="/">Home</a></li>
           <li><a href="/user/login">Login<em class="sfFont">(Beta)</em></a></li>
           <li><a href="/user/logout">Logout</a></li>
