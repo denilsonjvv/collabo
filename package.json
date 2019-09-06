@@ -1,19 +1,16 @@
 {
   "name": "nathaliesblog",
-  "version": "1.1.0",
-  "description": "Nathalies Blog",
+  "version": "1.1.1",
+  "description": "A simple team management web app that aims to reach steady results for your projects.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "lifestyle",
-    "instagram",
-    "pictures",
-    "blog",
-    "life"
+    "project",
+    "tasks"
   ],
-  "author": "Nathalie Juarez",
+  "author": "Denilson Velasquez",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

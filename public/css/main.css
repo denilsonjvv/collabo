@@ -13,6 +13,10 @@
     url("./fonts/SFMonoRegular.woff") format("woff");
 }
 
+.sfFont {
+  font-family: "SF Mono Regular", sans-serif;
+}
+
 /* Root Colors */
 :root {
   --pink: #ff49df;
@@ -67,15 +71,24 @@ form button:focus {
   outline: none;
 }
 button.btnlink {
-  color: white;
-  background: #3ae4a5;
-  border: 1px solid #00a05e;
+  color: #007eff;
+  background: white;
+  border: 1px solid #a7a7a7;
   padding: 5px;
   border-radius: 3px;
   font-weight: bold;
   cursor: pointer;
 }
-button.btnlink a {
+button.bluelink {
+  color: white;
+  background: #43c2ff;
+  border: 1px solid #007ed8;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button a {
   color: inherit;
 }
 /*Small Hacks*/
@@ -172,22 +185,4 @@ nav .navigation ul.nav-list li a {
   margin: 10px 0;
   background-color: #eee;
   border-radius: 5px;
-}
-
-#updates .upd {
-  display: inline-block;
-  background-color: white;
-  color: #70c6ff;
-  padding: 5px;
-  margin: 10px 0;
-  font-size: 15px;
-}
-#updates .inquiry {
-  padding: 15px;
-  background-color: #70c6ff;
-  color: white;
-}
-
-#activeproj .prjct {
-  display: inline-block;
 }

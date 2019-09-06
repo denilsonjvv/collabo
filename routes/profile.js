@@ -36,7 +36,6 @@ router.put("/:id", auth.userIsLogged, function(req, res) {
       if (err) {
         console.log("Error" + err);
       } else {
-        console.log("success");
         res.send(result); //Important for Ajax Done function to fire
       }
     }

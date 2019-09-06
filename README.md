@@ -1,5 +1,5 @@
 # collabO
-###### V1.1.0
+###### V1.1.1
 
 A simple team management web app that aims to reach steady results for your projects.
 

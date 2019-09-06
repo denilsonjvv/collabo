@@ -15,7 +15,7 @@
                             Profile Updated!
                         </div>
                         <h3>
-                        Edit your profile
+                            Settings
                         </h3>
                         <hr class="line"/>
                         <p>
@@ -26,7 +26,9 @@
                             <label for="email">Email</label>
                             <input type="text" class="form-control" id="email" name="email" value="<%= user.email %>" placeholder="Email">
                         </p>
-                        <a id="saveButton" href='javascript:void(0)' disabled="false" data-userid="<%= user._id %>">Save</a>
+                        <button class="btnlink">
+                            <a id="saveButton" href='javascript:void(0)' disabled="false" data-userid="<%= user._id %>">Save</a>
+                        </button>
                     </div>
                 </form>
             </div>

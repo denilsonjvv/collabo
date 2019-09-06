@@ -4,25 +4,16 @@
 <h1>collabO</h1>
     <section class="greybox" id="activeproj">
         <h3>Active Projects</h3>
+            <button class="btnlink">
+        <a href="/new">Add Project</a>
+    </button>
         <hr class="line">
             <% projects.forEach(function(project){ %>
-            <button class="btnlink">
+            <button class="bluelink">
                 <a href="/p/<%= project._id%>"><%= project.title %></a>
             </button>   
             <% });%>
     </section>
-    <section class="greybox" id="updates">
-        <h3>Updates Dummy Info</h3>
-        <hr class="line"/>
-        <span class="upd">Last Update: 18 hours ago</span>
-        <div class="inquiry">
-            <p>Jacob completed inquiry #4521 in project Team Project Admin</p>
-        </div>
-        <div class="inquiry">
-            <p>Jacob completed inquiry #4521 in project Team Project Admin</p>
-        </div>
-    </section>
-    <a href="/new">NEW PROJECT</a>
 </div>
 
 
