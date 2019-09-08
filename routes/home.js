@@ -52,7 +52,7 @@ router.get("/p/:id", auth.userIsLogged, function(req, res) {
     .populate("tasks")
     .exec(function(err, foundProject) {
       if (err) {
-        console.log("Show project page error.");
+        res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
       } else {
         res.render("projects/show", { project: foundProject });
       }
@@ -62,7 +62,11 @@ router.get("/p/:id", auth.userIsLogged, function(req, res) {
 router.get("/p/:id/edit", auth.checkIfOwner, function(req, res) {
   Project.findById(req.params.id, function(err, project) {
     if (err) {
-      console.log("errors were made");
+      req.flash(
+        "info_msg",
+        "There was a problem accessing your project, try again."
+      );
+      res.redirect("/");
     } else {
       res.render("projects/edit", { project });
     }
@@ -75,7 +79,11 @@ router.put("/p/:proj_id", function(req, res) {
     project
   ) {
     if (err) {
-      console.log("error finding project and updating");
+      req.flash(
+        "info_msg",
+        "There was a problem updating your project, try again."
+      );
+      res.redirect("back");
     } else {
       res.redirect("/p/" + project._id);
     }
@@ -87,24 +95,19 @@ router.delete("/p/:id", auth.userIsLogged, auth.checkIfOwner, function(
   res,
   next
 ) {
-  if (req.isAuthenticated()) {
-    Project.findById(req.params.id, function(err, project) {
-      if (err) return next(err);
-      project.delete();
-      // Need to add flash message for deletion confirmation
-      res.redirect("/");
-    });
-  } else {
-    console.log("you need tgo be loged in to do that");
-    res.send("you need tgo be loged in to do that");
-  }
+  Project.findById(req.params.id, function(err, project) {
+    if (err) return next(err);
+    project.delete();
+    // Need to add flash message for deletion confirmation
+    res.redirect("/");
+  });
 });
 
 // New task page
 router.get("/p/:task_id/new", auth.userIsLogged, function(req, res) {
   Project.findById(req.params.task_id, function(err, foundProject) {
     if (err) {
-      console.log("Take back with err msg");
+      res.render("errors/project", { projectID: req.params.task_id });
     } else {
       User.find({}, function(err, foundUsers) {
         res.render("tasks/new", { project: foundProject, user: foundUsers });
