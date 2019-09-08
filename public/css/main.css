@@ -83,7 +83,10 @@ form input:focus,
 form button:focus {
   outline: none;
 }
-button.btnlink {
+input.btnlink:hover {
+  opacity: 0.8;
+}
+.btnlink {
   font-family: "SF Mono Regular";
   font-size: 0.7em;
   color: #007eff;
@@ -93,7 +96,7 @@ button.btnlink {
   cursor: pointer;
   text-transform: uppercase;
 }
-button.bluelink {
+.bluelink {
   color: white;
   background: #43c2ff;
   border: 1px solid #007ed8;

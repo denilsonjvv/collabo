@@ -1,16 +1,20 @@
 <% include ../partials/header %>
 
-<% include ../partials/messages %>
+
  
 <div class="container">
+<% include ../partials/messages %>
 <section class="greybox">
     <span class="digit"> ID <%=project.id%> </span>
     <hr class="line"/> 
     <h3><%= project.title %></h3>
     <p><%= project.description %></p>
-    <form class="deleteForm" action="/p/<%= project._id %>?_method=DELETE" method="POST">
-        <button class="btn btn-danger">Delete</button>
-    </form>   
+    <button class="btnlink">
+        <a href="/p/<%= project.id %>/edit">Edit</a>
+    </button>
+    <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
+        <input type="submit" class="btnlink" value="Delete">
+    </form>
 </section>
 <section class="greybox">
     <h3 class="ctr">Tasks</h3>
@@ -30,12 +34,12 @@
                 <span class="assigned"><%= asgdUsers[i] %></span>
             
         <%  } %>
-
+ 
         </div>
         <span class="dueDate"><%= task.dueDate%></span>
         <span class="dueDate">By: <%= task.createdby.name %></span>
-        <form class="deleteForm" action="/p/<%= project._id %>/<%= task._id %>?_method=DELETE" method="POST">
-            <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+        <form class="EditForm" action="/p/<%= project._id %>/<%= task._id %>?_method=UPDATE" method="POST">
+            <input type="submit" class="btn btn-xs btn-danger" value="hi">
         </form>
     </div>
     <% }); %>

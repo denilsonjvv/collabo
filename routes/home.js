@@ -58,15 +58,46 @@ router.get("/p/:id", auth.userIsLogged, function(req, res) {
       }
     });
 });
-//DESTROY project page
-router.delete("/p/:id", auth.userIsLogged, function(req, res, next) {
+//Edit project page
+router.get("/p/:id/edit", auth.checkIfOwner, function(req, res) {
   Project.findById(req.params.id, function(err, project) {
-    if (err) return next(err);
-
-    project.delete();
-    // Need to add flash message for deletion confirmation
-    res.redirect("/");
+    if (err) {
+      console.log("errors were made");
+    } else {
+      res.render("projects/edit", { project });
+    }
   });
+});
+//UPDATE project apge
+router.put("/p/:proj_id", function(req, res) {
+  Project.findByIdAndUpdate(req.params.proj_id, req.body.project, function(
+    err,
+    project
+  ) {
+    if (err) {
+      console.log("error finding project and updating");
+    } else {
+      res.redirect("/p/" + project._id);
+    }
+  });
+});
+//DESTROY project page
+router.delete("/p/:id", auth.userIsLogged, auth.checkIfOwner, function(
+  req,
+  res,
+  next
+) {
+  if (req.isAuthenticated()) {
+    Project.findById(req.params.id, function(err, project) {
+      if (err) return next(err);
+      project.delete();
+      // Need to add flash message for deletion confirmation
+      res.redirect("/");
+    });
+  } else {
+    console.log("you need tgo be loged in to do that");
+    res.send("you need tgo be loged in to do that");
+  }
 });
 
 // New task page
