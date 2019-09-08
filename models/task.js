@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var Project = require("./project");
 
 //SCHEMA SETUP
 var taskSchema = new mongoose.Schema({

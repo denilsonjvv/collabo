@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var Task = require("./task");
 
 //SCHEMA SETUP
 var projectSchema = new mongoose.Schema({
@@ -22,6 +23,18 @@ var projectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
     format: "%Y-%m-%d%"
+  }
+});
+projectSchema.pre("remove", async function(next) {
+  try {
+    await Task.deleteMany({
+      _id: {
+        $in: this.tasks
+      }
+    });
+    next();
+  } catch (err) {
+    next(err);
   }
 });
 

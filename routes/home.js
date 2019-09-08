@@ -58,10 +58,20 @@ router.get("/p/:id", auth.userIsLogged, function(req, res) {
       }
     });
 });
+//DESTROY project page
+router.delete("/p/:id", auth.userIsLogged, function(req, res, next) {
+  Project.findById(req.params.id, function(err, project) {
+    if (err) return next(err);
+
+    project.delete();
+    // Need to add flash message for deletion confirmation
+    res.redirect("/");
+  });
+});
 
 // New task page
-router.get("/p/:id/new", auth.userIsLogged, function(req, res) {
-  Project.findById(req.params.id, function(err, foundProject) {
+router.get("/p/:task_id/new", auth.userIsLogged, function(req, res) {
+  Project.findById(req.params.task_id, function(err, foundProject) {
     if (err) {
       console.log("Take back with err msg");
     } else {
@@ -73,7 +83,7 @@ router.get("/p/:id/new", auth.userIsLogged, function(req, res) {
 });
 
 // Create new task
-router.post("/p/:id", auth.userIsLogged, function(req, res) {
+router.post("/p/:proj_id", auth.userIsLogged, function(req, res) {
   var task = req.body.task;
   var assigned = req.body.assigned;
   var priority = req.body.priority;
@@ -94,7 +104,7 @@ router.post("/p/:id", auth.userIsLogged, function(req, res) {
     project: project,
     createdby: createdby
   };
-  Project.findById(req.params.id, function(err, foundProject) {
+  Project.findById(req.params.proj_id, function(err, foundProject) {
     if (err) {
       console.log("project ID not found error.");
       res.redirect("/");
@@ -103,10 +113,32 @@ router.post("/p/:id", auth.userIsLogged, function(req, res) {
         if (err) {
           console.log("Task not found error.");
         } else {
+          foundTask.save();
           foundProject.tasks.push(foundTask);
           foundProject.save();
-          console.log(foundTask);
           res.redirect("/p/" + foundProject._id); //redirect back to campgrounds page
+        }
+      });
+    }
+  });
+});
+//DELETE task
+router.delete("/p/:proj_id/:task_id", function(req, res, next) {
+  Project.findById(req.params.proj_id, function(err, foundProject) {
+    if (err) {
+      console.log("project ID not found error.");
+      res.redirect("/");
+    } else {
+      //findbyIDandRemove
+      Task.findById(req.params.task_id, function(err, foundTask) {
+        if (err) {
+          // error handler needed
+          res.redirect("back");
+        } else {
+          foundProject.tasks.remove(foundTask);
+          foundProject.save();
+          foundTask.remove();
+          res.redirect("/p/" + req.params.proj_id);
         }
       });
     }
