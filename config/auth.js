@@ -15,8 +15,8 @@ middlewareObj.checkIfOwner = function(req, res, next) {
     //find the Project with ID
     Project.findById(req.params.id, function(err, foundProject) {
       if (err) {
-        res.redirect("back");
         req.flash("info_msg", "You must be logged in to access this page.");
+        res.redirect("back");
       } else {
         if (foundProject.author.id.equals(req.user._id)) {
           next();

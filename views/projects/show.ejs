@@ -3,11 +3,11 @@
 
  
 <div class="container">
+<span class="digit"> ID <%=project.id%> </span>
 <% include ../partials/messages %>
 <section class="greybox">
-    <span class="digit"> ID <%=project.id%> </span>
-    <hr class="line"/> 
     <h3><%= project.title %></h3>
+    <hr class="line"/> 
     <p><%= project.description %></p>
     <button class="btnlink">
         <a href="/p/<%= project.id %>/edit">Edit</a>
@@ -38,8 +38,8 @@
         </div>
         <span class="dueDate"><%= task.dueDate%></span>
         <span class="dueDate">By: <%= task.createdby.name %></span>
-        <form class="EditForm" action="/p/<%= project._id %>/<%= task._id %>?_method=UPDATE" method="POST">
-            <input type="submit" class="btn btn-xs btn-danger" value="hi">
+        <form class="deleteForm" action="/p/<%= project._id %>/<%= task._id %>?_method=DELETE" method="POST">
+            <input type="submit" class="btnlink" value="Delete">
         </form>
     </div>
     <% }); %>
