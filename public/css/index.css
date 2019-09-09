@@ -12,23 +12,14 @@
 }
 .container .block {
   display: block;
+  margin: 5px 0;
 }
-.container .block #title {
-  border: none;
-  font-size: 20px;
-  padding: 5px 10px;
-  border-bottom: 1px solid #ccc;
-  color: #bbb;
-  font: 12px;
+/* Project data */
+.deleteBtn {
+  padding: 2px 5px;
 }
-.container .block #upload {
-  display: block;
-  padding: 5px;
-  border: 1px solid #3e3efc;
-  background: white;
-  color: #3e3efc;
-  font-size: bold;
-  cursor: pointer;
+.deleteBtn:focus {
+  box-shadow: none;
 }
 /*  TASK LAYOUT   */
 .greybox .taskbox {
@@ -68,4 +59,9 @@
 }
 .greybox .taskbox .dueDate {
   background-color: #333;
+}
+
+/*  New Task Style     */
+input[type="checkbox"] {
+  width: auto;
 }

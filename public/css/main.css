@@ -15,11 +15,16 @@
 .sfFont {
   font-family: "SF Mono Regular", sans-serif;
 }
-
+.highlight {
+  color: var(--blue);
+  background-color: #dde6ff;
+  padding: 3px;
+}
 /* Root Colors */
 :root {
   --pink: #ff49df;
   --lightgrey: #f7f7f7;
+  --blue: #007eff;
 }
 /* Font Links */
 /* Normalize and Config */
@@ -82,12 +87,44 @@ a:visited {
 a:hover {
   opacity: 0.8;
 }
-form input:focus,
-form button:focus {
+input:focus,
+button:focus,
+textarea:focus {
   outline: none;
 }
+label {
+  width: 100%;
+  display: block;
+  margin: 15px 0 3px;
+  font-size: 0.9em;
+  color: #404040;
+}
+
 input.btnlink:hover {
   opacity: 0.8;
+}
+textarea {
+  font: inherit;
+  max-width: 100%;
+  max-height: 200px;
+  min-height: 4pc;
+}
+input,
+textarea {
+  background-color: white;
+  border: 1px solid #989898;
+  border-radius: 3px;
+  padding: 8px;
+  font-size: 0.9em;
+  width: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+}
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.09);
+  opacity: 1;
 }
 .btnlink {
   display: inline-block;
@@ -106,11 +143,18 @@ input.btnlink:hover {
   border: 1px solid #007ed8;
   border-radius: 3px;
 }
+.submitBtn {
+  padding: 10px;
+}
+.submitBtn:hover {
+  opacity: 0.8;
+}
 button {
   display: inline-block;
   padding: 0;
 }
-button a {
+button a,
+button input {
   color: inherit;
   padding: 2px 5px;
   display: inline-block;
@@ -214,6 +258,7 @@ nav .navigation ul.nav-list li a {
   background-color: #f3f3f3;
   border-radius: 5px;
 }
+
 .greybox h3 {
   margin-top: 0px;
 }

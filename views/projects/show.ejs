@@ -13,7 +13,7 @@
         <a href="/p/<%= project.id %>/edit">Edit</a>
     </button>
     <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
-        <input type="submit" class="btnlink" value="Delete">
+        <input type="submit" class="deleteBtn btnlink" value="Delete">
     </form>
 </section>
 <section class="greybox">
@@ -39,7 +39,7 @@
         <span class="dueDate"><%= task.dueDate%></span>
         <span class="dueDate">By: <%= task.createdby.name %></span>
         <form class="deleteForm" action="/p/<%= project._id %>/<%= task._id %>?_method=DELETE" method="POST">
-            <input type="submit" class="btnlink" value="Delete">
+            <input type="submit" class="deleteBtn btnlink" value="Delete">
         </form>
     </div>
     <% }); %>

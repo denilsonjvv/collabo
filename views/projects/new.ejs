@@ -1,19 +1,21 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <h1>Project Post</h1>
+  <div class="greybox">
+    <h3>New Project</h3>
     <hr class="line">
     <form action="/" method="POST">
       <div class="block">
-          <label for="name">Title</label>
-          <input type="text" id="title" name="title" aria-describedby="title" placeholder="...">
+          <label for="title">Project Name</label>
+          <input type="text" id="title" name="title" aria-describedby="title" placeholder="Enter new project name" autofocus>
       </div>
       <div class="block">
         <label for="description">Description:</label>
-        <textarea type="text" id="description" name="description" placeholder="Post Description"></textarea>
+        <textarea type="text" id="description" name="description" rows="4"></textarea>
       </div>
-      <button>Submit</button>
+      <button class="btnlink submitBtn">Submit</button>
     </form>
+  </div>
 </div>
 
 <% include ../partials/footer %>

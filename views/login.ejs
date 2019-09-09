@@ -1,16 +1,15 @@
 <% include partials/header %>
 
-  <div class="form-contain">
-    <div class="header"> 
+<div class="container">
       <h1>collabO</h1>
       <hr class="line"/>
       <% include ./partials/messages %>
       <form action="/user/login" method="POST">
-        <div class="form-group">
+        <div class="block">
           <label for="email">Email</label>
           <input type="text"  id="email"  name="username"  class="form-control"  placeholder="Enter Email"/>
         </div>
-        <div class="form-group">
+        <div class="block">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
         </div>
@@ -19,7 +18,6 @@
       <p>
         No Account? <a href="/user/register">Register</a>
       </p>
-    </div>
-  </div>
+</div>
 
 <% include partials/footer %>

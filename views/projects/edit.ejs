@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <h1>Project Post</h1>
-    <hr class="line">
+  <span class="digit">ID <%= project.id %></span>
+  <div class="greybox">
     <form action="/p/<%= project._id %>?_method=PUT" method="POST">
       <div class="block">
           <label for="name">Title</label>
@@ -12,8 +12,9 @@
         <label for="description">Description:</label>
         <textarea type="text" id="description" name="project[description]"><%= project.description %></textarea>
       </div>
-      <button>Submit</button>
+      <button class="btnlink submitBtn">Submit</button>
     </form>
+  </div>
 </div>
 
 <% include ../partials/footer %>
