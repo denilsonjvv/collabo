@@ -1,8 +1,10 @@
 var express = require("express");
+var mongoose = require("mongoose");
 var router = express.Router({ mergeParams: true });
 
 var Project = require("../models/project"),
   User = require("../models/user"),
+  Updates = require("../models/updates"),
   Task = require("../models/task"),
   auth = require("../config/auth"); // connect to auth file to authorize.
 
@@ -16,10 +18,31 @@ router.get("/", auth.userIsLogged, function(req, res) {
     }
   });
 });
+// Landing page
+router.get("/", auth.userIsLogged, function(req, res) {
+  Project.find({}, function(err, projects) {
+    if (err) {
+      console.log("Landing page error");
+    } else {
+      // get all tasks as object
+      Task.find({}, (err, tasks) => {
+        if (err) {
+          console.log("Error getting tasks");
+        }
+        res.render("index", {
+          projectsAndTasks,
+          projects,
+          tasks,
+          name: req.user.name
+        });
+      });
+    }
+  });
+});
 
 //New Show Post Form
 router.get("/new", auth.userIsLogged, function(req, res) {
-  res.render("projects/new");
+  res.render("projects/new", { user: req.user });
 });
 
 //NEW Project Create
@@ -41,7 +64,27 @@ router.post("/", auth.userIsLogged, function(req, res) {
     if (err) {
       console.log("Trouble creating project error");
     } else {
-      res.redirect("/"); //redirect back to campgrounds page
+      let newUpdate = {
+        name: author.name,
+        projectName: title
+      };
+      User.findOneAndUpdate(
+        { _id: req.params.user_id },
+        { $push: { updates: newUpdate } },
+        { upsert: true },
+        function(err, updated) {
+          if (err) {
+            console.log("-------------");
+            console.log(err);
+          } else {
+            req.flash(
+              "success_msg",
+              "Your new project has been created, check it out!"
+            );
+            res.redirect("/"); //redirect back to campgrounds page
+          }
+        }
+      );
     }
   });
 });

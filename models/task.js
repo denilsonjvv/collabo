@@ -15,10 +15,15 @@ var taskSchema = new mongoose.Schema({
     name: String,
     profileImg: String
   },
+  lastUpdated: {
+    type: Date,
+    format: "%Y-%m-%d%",
+    default: new Date()
+  },
   date: {
     type: Date,
-    default: Date.now,
-    format: "%Y-%m-%d%"
+    format: "%Y-%m-%d%",
+    default: Date.now
   }
 });
 

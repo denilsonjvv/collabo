@@ -21,7 +21,14 @@ var UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  //Updates
+  updates: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Updates"
+    }
+  ]
 });
 
 UserSchema.plugin(passportLocalMongoose, {
