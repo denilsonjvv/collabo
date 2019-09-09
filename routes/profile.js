@@ -7,7 +7,8 @@ var User = require("../models/user"),
 router.get("/:id", auth.userIsLogged, function(req, res) {
   User.findById(req.params.id, function(err, foundProfile) {
     if (err) {
-      console.log(err);
+      req.flash("error_msg", "The user ID you are looking for does not exist.");
+      res.redirect("/");
     } else {
       //render show template for that blog
       res.render("profile/show", { user: foundProfile });
@@ -18,7 +19,8 @@ router.get("/:id", auth.userIsLogged, function(req, res) {
 router.get("/:id/edit", auth.userIsLogged, function(req, res) {
   User.findById(req.params.id, function(err, foundProfile) {
     if (err) {
-      console.log(err);
+      req.flash("error_msg", "The user ID you are looking for does no exist.");
+      res.redirect("/");
     } else {
       //render show template for that blog
       res.render("profile/edit", { user: foundProfile });
@@ -34,7 +36,11 @@ router.put("/:id", auth.userIsLogged, function(req, res) {
     { $set: { name: name, email: email } },
     function(err, result) {
       if (err) {
-        console.log("Error" + err);
+        req.flash(
+          "error_msg",
+          "There was a problem updating your project, try again."
+        );
+        res.redirect("/");
       } else {
         res.send(result); //Important for Ajax Done function to fire
       }
