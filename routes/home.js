@@ -72,7 +72,7 @@ router.get("/p/:id/edit", auth.checkIfOwner, function(req, res) {
     }
   });
 });
-//UPDATE project apge
+//UPDATE project page
 router.put("/p/:proj_id", function(req, res) {
   Project.findByIdAndUpdate(req.params.proj_id, req.body.project, function(
     err,
@@ -151,6 +151,27 @@ router.post("/p/:proj_id", auth.userIsLogged, function(req, res) {
           foundProject.tasks.push(foundTask);
           foundProject.save();
           res.redirect("/p/" + foundProject._id); //redirect back to campgrounds page
+        }
+      });
+    }
+  });
+});
+//Edit task page
+router.get("/p/:proj_id/:task_id/edit", function(req, res) {
+  Project.findById(req.params.proj_id, function(err, project) {
+    if (err) {
+      req.flash(
+        "info_msg",
+        "There was a problem accessing this project ID, try again."
+      );
+      res.redirect("/");
+    } else {
+      Task.findById(req.params.task_id, function(err, task) {
+        if (err) {
+        } else {
+          User.find({}, function(err, foundUsers) {
+            res.render("tasks/edit", { task, project, user: foundUsers });
+          });
         }
       });
     }

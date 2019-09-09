@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<div class="container">
+<h5>Under Construction</h5>
+  <div class="greybox">
+    <h3>Edit task <span class="highlight"><%= task.task %></span>
+    </h3>
+    <span class="digit">From Project: <%= project.title %></span><br>
+    <span class="digit">Project ID <%= project.id %></span>
+    <hr class="line">
+    <form action="/p/<%= task._id %>" method="POST">
+      <div class="block">
+          <label for="task">Task</label>
+          <textarea type="text" id="task" name="task" aria-describedby="task"><%= task.task %></textarea>
+      </div>
+      <hr class="line"/>
+      <div class="block">
+          <label for="priority">Priority</label>
+          <select id="priority" name="priority" select="Medium">
+            <option value="Low" value="Low">Low</option>
+            <option value="Medium" value="Medium">Medium</option>
+            <option value="High" value="High">High</option>
+          </select>
+      </div>
+      <div class="block">
+          <label for="assigned">Assign To</label>
+      </div>
+      <div class="block">
+          <label for="dueDate">Due</label>
+          <input type="text" id="dueDate" name="dueDate" value="<%= task.dueDate %>">
+      </div>
+      <button class="btnlink submitBtn">Submit</button>
+    </form>
+  </div>
+</div>
+<script>
+    //Need to Add information from database into the form
+</script>
+<% include ../partials/footer %>
