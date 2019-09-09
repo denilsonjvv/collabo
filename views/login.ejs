@@ -1,9 +1,9 @@
 <% include partials/header %>
 
 <div class="container">
-      <h1>collabO</h1>
-      <hr class="line"/>
       <% include ./partials/messages %>
+      <h1>collabO - <span style="color: var(--blue)">Login</span></h1>
+  <div class="greybox">
       <form action="/user/login" method="POST">
         <div class="block">
           <label for="email">Email</label>
@@ -13,11 +13,12 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" class="submitBtn btnlink">Login</button>
       </form>
       <p>
         No Account? <a href="/user/register">Register</a>
       </p>
+  </div> 
 </div>
 
 <% include partials/footer %>
