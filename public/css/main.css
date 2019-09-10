@@ -98,8 +98,14 @@ ul {
   background-color: #dde6ff;
   margin-left: 4px;
 }
+.timelineExtend {
+  height: 12px;
+  width: 8px;
+  background-color: #5c87ff;
+  margin-left: 4px;
+}
 #updateUl {
-  font-size: 0.8em;
+  font-size: 13px;
   color: var(--black);
   margin: 0;
   padding: 0;
@@ -115,6 +121,7 @@ ul {
 #updateUl li a {
   width: 100%;
   padding: 5px;
+  color: var(--black);
 }
 input:focus,
 button:focus,

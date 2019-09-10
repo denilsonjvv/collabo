@@ -103,7 +103,16 @@ router.post("/update/:id", auth.userIsLogged, function(req, res) {
     }
   });
 });
-
+router.get("/seen/:id", auth.userIsLogged, async function(req, res) {
+  try {
+    let updates = await Updates.findById(req.params.id);
+    updates.isRead = true;
+    updates.save();
+    res.redirect("/p/" + updates.projectId);
+  } catch {
+    console.log(err); // needs err handler
+  }
+});
 //SHOW project page
 router.get("/p/:id", auth.userIsLogged, function(req, res) {
   Project.findById(req.params.id)

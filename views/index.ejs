@@ -17,20 +17,24 @@
     </section>
     <section class="greybox">
     <h5>Updates</h5>
-    <ul id="updateUl">
+        <ul id="updateUl">
         <% projects.reverse().forEach(function(project){ %>
             <% project.updates.forEach(function(update){ %>
-            <li>
-                <a href="/p/<%= update.projectId %>">
-                    <span class="highlight"><%= update.name %></span> 
-                    embarked a project 
-                    <span class="highlight"><%= update.projectName%></span>
-                </a>
-            </li>    
-            <div class="timeline"></div>
-            <% });%>
-        <% }) // End of projects.forEach;%>
-    </ul>
+                    <li>
+                        <a href="/seen/<%= update.id %>">
+                            <span class="highlight"><%= update.name %></span> 
+                            embarked a project 
+                            <span class="highlight"><%= update.projectName%></span>
+                        </a>
+                    </li>
+                    <% if(update.isRead === false){ %>
+                    <div class="timelineExtend"></div>
+                    <%} else {%>
+                        <div class="timeline"></div>
+                    <% } %>
+            <% }); //End of updates.forEach %>
+        <% }); // End of projects.forEach  %>
+        </ul>
     </section>
 </div>
 
