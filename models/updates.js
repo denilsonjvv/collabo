@@ -4,7 +4,9 @@ var mongoose = require("mongoose");
 var updatesSchema = new mongoose.Schema({
   name: String,
   projectName: String,
-  taskID: String,
+  projectId: String,
+  taskName: String,
+  taskId: String,
   isRead: {
     type: Boolean,
     default: false

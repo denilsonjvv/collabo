@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
-var Task = require("./task");
+var Task = require("./task"),
+  Updates = require("./updates");
 
 //SCHEMA SETUP
 var projectSchema = new mongoose.Schema({
@@ -23,13 +24,25 @@ var projectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
     format: "%Y-%m-%d%"
-  }
+  },
+  //Updates
+  updates: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Updates"
+    }
+  ]
 });
 projectSchema.pre("remove", async function(next) {
   try {
     await Task.deleteMany({
       _id: {
         $in: this.tasks
+      }
+    });
+    await Updates.deleteMany({
+      _id: {
+        $in: this.updates
       }
     });
     next();

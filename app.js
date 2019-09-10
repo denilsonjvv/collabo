@@ -9,7 +9,8 @@ const flash = require("connect-flash"),
   bodyParser = require("body-parser"),
   LocalStrategy = require("passport-local"),
   methodOverride = require("method-override"),
-  User = require("./models/user");
+  User = require("./models/user"),
+  Project = require("./models/project");
 const indexRoutes = require("./routes/index"),
   homeRoutes = require("./routes/home"),
   profileRoutes = require("./routes/profile");
@@ -54,10 +55,12 @@ passport.deserializeUser(User.deserializeUser());
 app.use(async function(req, res, next) {
   if (req.user) {
     try {
-      let user = await User.findById(req.user._id)
+      let project = await Project.find({})
         .populate("updates", null, { isRead: false })
         .exec();
-      res.locals.updates = user.updates.reverse();
+      project.forEach(function(project) {
+        res.locals.updates = project.updates.reverse();
+      });
     } catch (err) {
       console.log(err.message);
     }

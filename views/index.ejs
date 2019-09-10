@@ -4,7 +4,7 @@
 <% include partials/messages %>
 <h1>collabO</h1>
     <section class="greybox" id="activeproj">
-        <h3>Active Projects</h3>
+        <h3>Globally Active Projects</h3>
             <button class="btnlink">
         <a href="/new">Add Project</a>
     </button>
@@ -12,8 +12,25 @@
             <% projects.forEach(function(project){ %>
             <button class="bluelink">
                 <a href="/p/<%= project._id%>"><%= project.title %></a>
-            </button>   
+            </button>
+            <% }) // End of projects.forEach;%>
+    </section>
+    <section class="greybox">
+    <h5>Updates</h5>
+    <ul id="updateUl">
+        <% projects.reverse().forEach(function(project){ %>
+            <% project.updates.forEach(function(update){ %>
+            <li>
+                <a href="/p/<%= update.projectId %>">
+                    <span class="highlight"><%= update.name %></span> 
+                    embarked a project 
+                    <span class="highlight"><%= update.projectName%></span>
+                </a>
+            </li>    
+            <div class="timeline"></div>
             <% });%>
+        <% }) // End of projects.forEach;%>
+    </ul>
     </section>
 </div>
 

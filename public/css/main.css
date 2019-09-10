@@ -25,6 +25,7 @@
   --pink: #ff49df;
   --lightgrey: #f7f7f7;
   --blue: #007eff;
+  --black: #232323;
 }
 /* Font Links */
 /* Normalize and Config */
@@ -52,19 +53,19 @@ h2 {
 }
 h3 {
   font-size: 1.25em;
-  color: #232323;
+  color: var(--black);
 }
 h4 {
   font-size: 1.1em;
-  color: #232323;
+  color: var(--black);
 }
 h5 {
   font-size: 0.97em;
-  color: #232323;
+  color: var(--black);
 }
 h6 {
   font-size: 0.85em;
-  color: #232323;
+  color: var(--black);
 }
 p {
   font-size: 0.9em;
@@ -73,6 +74,7 @@ p {
 }
 a {
   text-decoration: none;
+  display: inline-block;
 }
 a.link {
   color: inherit;
@@ -86,6 +88,33 @@ a:visited {
 
 a:hover {
   opacity: 0.8;
+}
+ul {
+  list-style: none;
+}
+.timeline {
+  height: 8px;
+  width: 4px;
+  background-color: #dde6ff;
+  margin-left: 4px;
+}
+#updateUl {
+  font-size: 0.8em;
+  color: var(--black);
+  margin: 0;
+  padding: 0;
+}
+#updateUl li {
+  background-color: #f2f5ff;
+  border: 2px solid#c8d8ff;
+}
+#updateUl li:hover {
+  border: 2px solid#81a5ff;
+  cursor: pointer;
+}
+#updateUl li a {
+  width: 100%;
+  padding: 5px;
 }
 input:focus,
 button:focus,
