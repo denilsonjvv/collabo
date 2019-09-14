@@ -71,47 +71,13 @@ router.post("/", auth.userIsLogged, function(req, res) {
           // NOTE: This will need to be refactored/modified for better error handling
           req.flash(
             "success_msg",
-            "Your new project has been created, check it out!"
+            "Your new project has been created, check it out below!"
           );
           res.redirect("/"); //redirect back to campgrounds page
         }
       });
     }
   });
-});
-
-router.post("/update/:id", auth.userIsLogged, function(req, res) {
-  let newUpdate = {
-    name: "New",
-    projectName: "Application Tech"
-  };
-  User.findById(req.params.id, function(err, foundUser) {
-    if (err) {
-      console.log("user ID not found error. / unknown error");
-      res.redirect("/");
-    } else {
-      Updates.create(newUpdate, function(err, newlyUpdated) {
-        if (err) {
-          console.log("Error uploading newTask error.");
-        } else {
-          newlyUpdated.save();
-          foundUser.updates.push(newlyUpdated);
-          foundUser.save();
-          res.redirect("/"); //redirect back home
-        }
-      });
-    }
-  });
-});
-router.get("/seen/:id", auth.userIsLogged, async function(req, res) {
-  try {
-    let updates = await Updates.findById(req.params.id);
-    updates.isRead = true;
-    updates.save();
-    res.redirect("/p/" + updates.projectId);
-  } catch {
-    console.log(err); // needs err handler
-  }
 });
 //SHOW project page
 router.get("/p/:id", auth.userIsLogged, function(req, res) {
@@ -126,7 +92,10 @@ router.get("/p/:id", auth.userIsLogged, function(req, res) {
     });
 });
 //Edit project page
-router.get("/p/:id/edit", auth.checkIfOwner, function(req, res) {
+router.get("/p/:id/edit", auth.checkIfOwner, auth.userIsLogged, function(
+  req,
+  res
+) {
   Project.findById(req.params.id, function(err, project) {
     if (err) {
       req.flash(
@@ -140,7 +109,10 @@ router.get("/p/:id/edit", auth.checkIfOwner, function(req, res) {
   });
 });
 //UPDATE project page
-router.put("/p/:proj_id", function(req, res) {
+router.put("/p/:proj_id", auth.checkIfOwner, auth.userIsLogged, function(
+  req,
+  res
+) {
   Project.findByIdAndUpdate(req.params.proj_id, req.body.project, function(
     err,
     project

@@ -75,6 +75,10 @@ p {
 a {
   text-decoration: none;
   display: inline-block;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
 }
 a.link {
   color: inherit;
@@ -93,9 +97,10 @@ ul {
   list-style: none;
 }
 .timeline {
-  height: 8px;
+  position: relative;
+  height: 4px;
   width: 4px;
-  background-color: #dde6ff;
+  background-color: #c8d8ff;
   margin-left: 4px;
 }
 .timelineExtend {

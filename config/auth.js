@@ -13,7 +13,10 @@ middlewareObj.userIsLogged = function(req, res, next) {
 middlewareObj.checkIfOwner = function(req, res, next) {
   if (req.isAuthenticated()) {
     //find the Project with ID
-    Project.findById(req.params.id, function(err, foundProject) {
+    Project.findById(req.params.id || req.params.proj_id, function(
+      err,
+      foundProject
+    ) {
       if (err) {
         res.render("errors/project", { projectID: req.params.id });
       } else {

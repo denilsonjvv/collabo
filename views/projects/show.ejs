@@ -1,7 +1,5 @@
 <% include ../partials/header %>
 
-
- 
 <div class="container">
 <span class="digit"> ID <%=project.id%> </span>
 <% include ../partials/messages %>
@@ -9,17 +7,24 @@
     <h3><%= project.title %></h3>
     <hr class="line"/> 
     <p><%= project.description %></p>
-    <button class="btnlink">
-        <a href="/p/<%= project.id %>/edit">Edit</a>
-    </button>
-    <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
-        <input type="submit" class="deleteBtn btnlink" value="Delete">
-    </form>
+        <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
+            <button class="btnlink">
+                <a href="/p/<%= project.id %>/edit">Edit</a>
+            </button>
+            <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
+                <input type="submit" class="deleteBtn btnlink" value="Delete">
+            </form>
+        <% }; %>
 </section>
 <section class="greybox">
     <h3 class="ctr">Tasks</h3>
     <hr class="line"/>
-    <button class="btnlink"><a href="/p/<%= project._id %>/new">Add Task</a></button>
+    <% 
+        var amount = project.tasks.length;
+        if(amount === 0){
+    %>
+        <p class="ctr"> There are no tasks, woop woop! Click here <button class="btnlink"><a href="/p/<%= project._id %>/new">+</a></button> to add new task!</p>
+    <% }else{ %>
     <% project.tasks.forEach(function(task){ %>
     <div class="taskbox">
         <h5><%= task.task %></h5>
@@ -46,6 +51,7 @@
         </button>
     </div>
     <% }); %>
+    <% } %>
 </section>
 </div>
 

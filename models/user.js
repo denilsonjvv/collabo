@@ -21,6 +21,12 @@ var UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  readProject: {
+    projectId: { type: String },
+    isRead: {
+      type: Boolean
+    }
   }
 });
 

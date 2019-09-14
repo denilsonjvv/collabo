@@ -21,17 +21,17 @@
         <% projects.reverse().forEach(function(project){ %>
             <% project.updates.forEach(function(update){ %>
                     <li>
-                        <a href="/seen/<%= update.id %>">
-                            <span class="highlight"><%= update.name %></span> 
-                            embarked a project 
+                        <a href="/p/<%= project.id %>">
+                            <% if(update.name === name) {%>
+                                <span class="highlight">You</span>
+                            <%} else { %>
+                                <span class="highlight"><%= update.name %></span> 
+                            <% } %> 
+                            created a project workplace
                             <span class="highlight"><%= update.projectName%></span>
                         </a>
                     </li>
-                    <% if(update.isRead === false){ %>
-                    <div class="timelineExtend"></div>
-                    <%} else {%>
-                        <div class="timeline"></div>
-                    <% } %>
+                    <div class="timeline"></div>
             <% }); //End of updates.forEach %>
         <% }); // End of projects.forEach  %>
         </ul>

@@ -7,10 +7,6 @@ var updatesSchema = new mongoose.Schema({
   projectId: String,
   taskName: String,
   taskId: String,
-  isRead: {
-    type: Boolean,
-    default: false
-  },
   lastUpdated: {
     type: Date,
     format: "%Y-%m-%d%",
