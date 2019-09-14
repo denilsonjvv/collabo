@@ -13,7 +13,8 @@ const flash = require("connect-flash"),
   Project = require("./models/project");
 const indexRoutes = require("./routes/index"),
   homeRoutes = require("./routes/home"),
-  profileRoutes = require("./routes/profile");
+  profileRoutes = require("./routes/profile"),
+  projectRoutes = require("./routes/project");
 
 //Passport config
 // require("./config/passport")(passport);
@@ -75,6 +76,7 @@ app.use(async function(req, res, next) {
 //Locate Routes
 app.use("/user", indexRoutes); //login and register
 app.use(homeRoutes); //  "/"
+app.use("/p", projectRoutes);
 app.use("/profile", profileRoutes);
 
 //-----------------LISTENING TO APP SERVER
@@ -83,23 +85,3 @@ const port = 4000;
 app.listen(port, hostname, () => {
   console.log(`Server running: http://${hostname}:${port}/`);
 });
-
-//creates new schema
-// Project.create(
-//   {
-//     title: "My First Blog!",
-//     description: "I love cats, blah blah blaaah!",
-//     author: {
-//       name: "Denilson",
-//       profileImg: "proImage.png"
-//     }
-//   },
-//   function(err, project) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("newly created campground!");
-//       console.log(project);
-//     }
-//   }
-// );
