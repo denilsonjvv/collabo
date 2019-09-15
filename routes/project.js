@@ -7,11 +7,22 @@ var Project = require("../models/project"),
   Updates = require("../models/updates"),
   auth = require("../config/auth"); // connect to auth file to authorize.
 
+//SHOW project page
+router.get("/:id", auth.userIsLogged, function(req, res) {
+  Project.findById(req.params.id)
+    .populate("tasks")
+    .exec(function(err, foundProject) {
+      if (err) {
+        res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
+      } else {
+        res.render("projects/show", { project: foundProject });
+      }
+    });
+});
 //Show Post Form
 router.get("/new", auth.userIsLogged, function(req, res) {
   res.render("projects/new", { user: req.user });
 });
-
 //CREATE new project
 router.post("/", auth.userIsLogged, function(req, res) {
   var title = req.body.title;
@@ -55,18 +66,6 @@ router.post("/", auth.userIsLogged, function(req, res) {
     }
   });
 });
-//SHOW project page
-router.get("/:id", auth.userIsLogged, function(req, res) {
-  Project.findById(req.params.id)
-    .populate("tasks")
-    .exec(function(err, foundProject) {
-      if (err) {
-        res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
-      } else {
-        res.render("projects/show", { project: foundProject });
-      }
-    });
-});
 //Edit project page
 router.get("/:id/edit", auth.checkIfOwner, auth.userIsLogged, function(
   req,
@@ -85,11 +84,8 @@ router.get("/:id/edit", auth.checkIfOwner, auth.userIsLogged, function(
   });
 });
 //UPDATE project page
-router.put("/:proj_id", auth.checkIfOwner, auth.userIsLogged, function(
-  req,
-  res
-) {
-  Project.findByIdAndUpdate(req.params.proj_id, req.body.project, function(
+router.put("/:id", auth.checkIfOwner, auth.userIsLogged, function(req, res) {
+  Project.findByIdAndUpdate(req.params.id, req.body.project, function(
     err,
     project
   ) {
@@ -119,10 +115,10 @@ router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, function(
 });
 
 // New task page
-router.get("/:task_id/new", auth.userIsLogged, function(req, res) {
-  Project.findById(req.params.task_id, function(err, foundProject) {
+router.get("/:id/newtask", auth.userIsLogged, function(req, res) {
+  Project.findById(req.params.id, function(err, foundProject) {
     if (err) {
-      res.render("errors/project", { projectID: req.params.task_id });
+      res.render("errors/project", { projectID: req.params.id });
     } else {
       User.find({}, function(err, foundUsers) {
         res.render("tasks/new", { project: foundProject, user: foundUsers });
@@ -132,7 +128,7 @@ router.get("/:task_id/new", auth.userIsLogged, function(req, res) {
 });
 
 // Create new task
-router.post("/:proj_id", auth.userIsLogged, function(req, res) {
+router.post("/:id", auth.userIsLogged, function(req, res) {
   var task = req.body.task;
   var assigned = req.body.assigned;
   var priority = req.body.priority;
@@ -153,7 +149,7 @@ router.post("/:proj_id", auth.userIsLogged, function(req, res) {
     project: project,
     createdby: createdby
   };
-  Project.findById(req.params.proj_id, function(err, foundProject) {
+  Project.findById(req.params.id, function(err, foundProject) {
     if (err) {
       console.log("project ID not found error.");
       res.redirect("/");
