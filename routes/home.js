@@ -3,9 +3,6 @@ var mongoose = require("mongoose");
 var router = express.Router({ mergeParams: true });
 
 var Project = require("../models/project"),
-  User = require("../models/user"),
-  Updates = require("../models/updates"),
-  Task = require("../models/task"),
   auth = require("../config/auth"); // connect to auth file to authorize.
 
 // Landing page
@@ -29,55 +26,6 @@ router.get("/", auth.userIsLogged, async function(req, res) {
   } catch (err) {
     res.redirect("back");
   }
-});
-
-//New Show Post Form
-router.get("/new", auth.userIsLogged, function(req, res) {
-  res.render("projects/new", { user: req.user });
-});
-
-//NEW Project Create
-router.post("/", auth.userIsLogged, function(req, res) {
-  var title = req.body.title;
-  var description = req.body.description;
-  var author = {
-    id: req.user._id,
-    name: req.user.name,
-    profileImg: req.user.profileImg
-  };
-  var newProject = {
-    title: title,
-    description: description,
-    author: author
-  };
-  //Create a new blog and save to database
-  Project.create(newProject, function(err, newProject) {
-    if (err) {
-      console.log(err);
-    } else {
-      let newUpdate = {
-        name: author.name,
-        projectName: title,
-        projectId: newProject._id
-      };
-      Updates.create(newUpdate, function(err, newlyUpdated) {
-        if (err) {
-          console.log("Error uploading newTask error.");
-        } else {
-          newlyUpdated.save();
-          newProject.updates.push(newlyUpdated);
-          newProject.save();
-          //successfully added data to update
-          // NOTE: This will need to be refactored/modified for better error handling
-          req.flash(
-            "success_msg",
-            "Your new project has been created, check it out below!"
-          );
-          res.redirect("/"); //redirect back to campgrounds page
-        }
-      });
-    }
-  });
 });
 
 //Global Router
