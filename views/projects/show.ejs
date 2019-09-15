@@ -4,8 +4,7 @@
 <span class="digit"> ID <%=project.id%> </span>
 <% include ../partials/messages %>
 <section class="greybox">
-    <h3><%= project.title %></h3>
-    <hr class="line"/> 
+    <h4><%= project.title %></h4>
     <p><%= project.description %></p>
         <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
             <button class="btnlink">
@@ -17,17 +16,17 @@
         <% }; %>
 </section>
 <section class="greybox">
-    <h3 class="ctr">Tasks</h3>
+    <h4>Tasks</h4>
     <hr class="line"/>
     <% 
         var amount = project.tasks.length;
         if(amount === 0){
     %>
-        <p class="ctr"> There are no tasks, woop woop! Click here <button class="btnlink"><a href="/p/<%= project._id %>/new">+</a></button> to add new task!</p>
+        <p class="ctr"> There are no tasks, woop woop! Click here <button class="btnlink"><a href="/p/<%= project._id %>/newtask">+</a></button> to add new task!</p>
     <% }else{ %>
     <% project.tasks.forEach(function(task){ %>
     <div class="taskbox">
-        <h5><%= task.task %></h5>
+        <p><%= task.task %></p>
         <span class="priority" id="priohigh"><%= task.priority %></span>
         
         <div class="grpAssigned">

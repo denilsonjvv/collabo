@@ -4,12 +4,34 @@
 @import "./index.css";
 @import "./profile.css";
 
+/* Orig Font */
 @font-face {
   font-family: "SF Mono Regular";
   font-style: normal;
   font-weight: normal;
   src: local("SF Mono Regular"),
     url("./fonts/SFMonoRegular.woff") format("woff");
+}
+@font-face {
+  font-family: "eightyshades";
+  src: url("fonts/eightyshades.eot");
+  src: url("fonts/eightyshades.eot?#iefix") format("embedded-opentype"),
+    url("fonts/eightyshades.woff") format("woff"),
+    url("fonts/eightyshades.ttf") format("truetype"),
+    url("fonts/eightyshades.svg#eightyshades") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* Use data attributes for inserting icons */
+[data-icon]:before {
+  font-family: "eightyshades";
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  color: #666;
 }
 
 .sfFont {
@@ -42,6 +64,7 @@ h5,
 h6 {
   margin: 10px 0;
   text-transform: capitalize;
+  font-weight: lighter;
 }
 h1 {
   font-size: 1.6em;
