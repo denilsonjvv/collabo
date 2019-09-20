@@ -3,8 +3,9 @@
 <div class="container">
   <div class="greybox">
     <% 
-      let mytasks = project.tasks[0];//checks if theres a
-      if(mytasks === undefined){ 
+    //check if there are any tasks
+      let mytasks = project.tasks[0];
+      if(mytasks === undefined){
         %>
         <h4>Add your first task to project <span class="highlight"><%= project.title %></span>!</h4>
       <% }else { %>
