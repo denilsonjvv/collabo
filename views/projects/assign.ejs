@@ -1,22 +1,23 @@
 <% include ../partials/header %>
 
-
 <div class="container">
   <div class="greybox">
 		<h4>Assign members to your project</h4>
+		<span class="digit"><%= project.title %></span><br>
     <span class="digit">Project ID <%= project.id %></span>
     <hr class="line">
 	<form>
 		<input type="text" id="assign" onkeyup="showResults(this.value)" placeholder="Search members">
+		<div id="memberPopup">
+			<ul id="membersList">
+			</ul>
+		</div>
 	</form>
     
 	<form action="/>" method="POST">
-			<ul id="membersList">
-			</ul>
       <button class="btnlink submitBtn">Continue</button>
     </form>
   </div>
 </div>
-
-<script src="/js/searchMembers.js">
+<script src="/js/searchMembers.js"></script>
 <% include ../partials/footer %>
