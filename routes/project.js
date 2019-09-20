@@ -3,25 +3,45 @@ var router = express.Router({ mergeParams: true });
 
 var Project = require("../models/project"),
   User = require("../models/user"),
+  UserNames = require("../models/userNames"),
   Task = require("../models/task"),
   Updates = require("../models/updates"),
   auth = require("../config/auth"); // connect to auth file to authorize.
 
+//Search Members route to Assign to Project
+router.get("/search", function(req, res, next) {
+  var q = req.query.q;
+  UserNames.find(
+    {
+      name: {
+        $regex: new RegExp(q)
+      }
+    },
+    {
+      _id: 0,
+      __v: 0
+    },
+    function(err, data) {
+      res.json(data);
+    }
+  ).limit(10);
+});
+
+//Show Post Form
+router.get("/new", auth.userIsLogged, function(req, res) {
+  res.render("projects/new", { user: req.user });
+});
 //SHOW project page
 router.get("/:id", auth.userIsLogged, function(req, res) {
   Project.findById(req.params.id)
     .populate("tasks")
     .exec(function(err, foundProject) {
-      if (err) {
+      if (err && "") {
         res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
       } else {
         res.render("projects/show", { project: foundProject });
       }
     });
-});
-//Show Post Form
-router.get("/new", auth.userIsLogged, function(req, res) {
-  res.render("projects/new", { user: req.user });
 });
 //CREATE new project
 router.post("/", auth.userIsLogged, function(req, res) {
@@ -60,8 +80,27 @@ router.post("/", auth.userIsLogged, function(req, res) {
             "success_msg",
             "Your new project has been created, check it out below!"
           );
-          res.redirect("/"); //redirect back to campgrounds page
+          res.redirect("/p/" + newProject._id + "/newtask"); //redirect back to campgrounds page
         }
+      });
+    }
+  });
+});
+//Assign users to project Page
+router.get("/:id/assign", auth.checkIfOwner, auth.userIsLogged, function(
+  req,
+  res
+) {
+  Project.findById(req.params.id, function(err, project) {
+    if (err) {
+      req.flash(
+        "info_msg",
+        "There was a problem accessing your project, try again."
+      );
+      res.redirect("/");
+    } else {
+      User.find({}, function(err, foundUsers) {
+        res.render("projects/assign", { project, users: foundUsers });
       });
     }
   });
