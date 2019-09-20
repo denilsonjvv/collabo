@@ -1,8 +1,7 @@
 let express = require("express");
 let router = express.Router({ mergeParams: true });
 let passport = require("passport"),
-  User = require("../models/user"),
-  UserNames = require("../models/userNames");
+  User = require("../models/user");
 let multer = require("multer"),
   path = require("path"),
   fs = require("fs");
@@ -104,18 +103,8 @@ router.post("/register", imgUpload.single("profileImg"), function(req, res) {
           if (err) {
             console.log(err);
           } else {
-            var userNamesInfo = { name };
-            UserNames.create(userNamesInfo, function(err, userNameCreated) {
-              if (err) {
-                console.log("There was an error updating userNames model");
-              } else {
-                req.flash(
-                  "success_msg",
-                  "You are now registered and can log in"
-                );
-                res.redirect("login");
-              }
-            });
+            req.flash("success_msg", "You are now registered and can log in");
+            res.redirect("login");
           }
         });
       }

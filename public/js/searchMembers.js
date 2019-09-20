@@ -2,24 +2,30 @@
 var showResults = debounce(function(arg) {
   var value = arg.trim();
   var membersList = $("#membersList");
-  var popup = $("memberPopup");
+  var popup = $("#memberPopup");
+  var input = $("#assign");
+  input.addClass("loading");
   if (value == "" || value.length <= 0) {
-    popup.fadeOut();
+    input.removeClass("loading");
+    popup.hide();
     return;
   } else {
-    popup.fadeIn();
+    popup.show();
   }
   var jqxhr = $.get("/p/search?q=" + value, function(data) {
     membersList.html("");
   })
     .done(function(data) {
       if (data.length === 0) {
-        membersList.append("<span>No members found</span>");
+        membersList.append(
+          "<span>No members found with ' " + value + " ' </span>"
+        );
       } else {
         data.forEach(x => {
           membersList.append("<li>" + x.name + "</li>");
         });
       }
+      input.removeClass("loading");
     })
     .fail(function(err) {
       console.log(err);

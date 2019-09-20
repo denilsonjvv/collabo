@@ -3,7 +3,6 @@ var router = express.Router({ mergeParams: true });
 
 var Project = require("../models/project"),
   User = require("../models/user"),
-  UserNames = require("../models/userNames"),
   Task = require("../models/task"),
   Updates = require("../models/updates"),
   auth = require("../config/auth"); // connect to auth file to authorize.
@@ -11,7 +10,7 @@ var Project = require("../models/project"),
 //Search Members route to Assign to Project
 router.get("/search", function(req, res, next) {
   var q = req.query.q;
-  UserNames.find(
+  User.find(
     {
       name: {
         $regex: new RegExp(q),

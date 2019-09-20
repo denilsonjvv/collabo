@@ -329,21 +329,38 @@ nav .navigation ul.nav-list li a {
 }
 
 /* search members POPUP style */
-input {
+.loading {
+  background-color: #ffffff;
+  background-image: url("/images/loader.gif");
+  background-size: 15px 15px;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+}
+#assign:focus {
+  box-shadow: none;
 }
 #membersList li {
   padding: 8px;
   font-size: 14px;
   color: #444;
-  border-bottom: 1px solid #e8e8e8;
-  background-color: white;
 }
 #membersList li:hover {
   background-color: var(--blue);
   color: white;
   cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+#membersList span {
+  display: inline-block;
+  padding: 8px;
+  color: #bbb;
+  font-size: 14px;
 }
 #memberPopup {
+  overflow: hidden;
   background-color: white;
   border-radius: 3px;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
