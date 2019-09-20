@@ -14,7 +14,8 @@ router.get("/search", function(req, res, next) {
   UserNames.find(
     {
       name: {
-        $regex: new RegExp(q)
+        $regex: new RegExp(q),
+        $options: "$i"
       }
     },
     {
