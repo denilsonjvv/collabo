@@ -1,4 +1,29 @@
 //Search members to project function
+let memberIds = [];
+let list;
+
+function addMember() {
+  let memForm = document.getElementById("newMembers");
+  for (var i = 0; i < list.length; i++) {
+    list[i].addEventListener("click", function() {
+      let att = this.getAttribute("data-memId"); // member Id from data Attribute
+      let memProImg = this.getAttribute("data-img");
+      memberIds.push(att);
+      let newName = this.textContent; //innerHtml (name)
+      let inputStr =
+        "<div class='memList'><input type='checkbox' name='members' value='" +
+        newName +
+        "' disabled='disabled' checked><img src='/pro-img/" +
+        memProImg +
+        "'>" +
+        newName +
+        "</input></div>";
+      memForm.insertAdjacentHTML("beforeend", inputStr);
+    });
+  }
+}
+
+//--------------
 var showResults = debounce(function(arg) {
   var value = arg.trim();
   var membersList = $("#membersList");
@@ -22,8 +47,21 @@ var showResults = debounce(function(arg) {
         );
       } else {
         data.forEach(x => {
-          membersList.append("<li>" + x.name + "</li>");
+          membersList.append(
+            "<li class='lis' data-img='" +
+              x.profileImg +
+              "' data-memId='" +
+              x._id +
+              "'><img src='/pro-img/" +
+              x.profileImg +
+              "'>" +
+              x.name +
+              "</li>"
+          );
         });
+
+        list = document.querySelectorAll(".lis");
+        addMember();
       }
       input.removeClass("loading");
     })

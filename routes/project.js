@@ -18,10 +18,13 @@ router.get("/search", function(req, res, next) {
       }
     },
     {
-      _id: 0,
       __v: 0
     },
     function(err, data) {
+      data.forEach(function(x) {
+        x.email = null;
+        x.date = null; // TEMPORARY SOlUTION to exclude some user data!
+      });
       res.json(data);
     }
   ).limit(10);
@@ -172,9 +175,6 @@ router.post("/:id", auth.userIsLogged, function(req, res) {
   var assigned = req.body.assigned;
   var priority = req.body.priority;
   var dueDate = req.body.dueDate;
-  var project = {
-    id: req.params.id
-  };
   var createdby = {
     id: req.user._id,
     name: req.user.name,
@@ -185,7 +185,6 @@ router.post("/:id", auth.userIsLogged, function(req, res) {
     assigned: assigned,
     priority: priority,
     dueDate: dueDate,
-    project: project,
     createdby: createdby
   };
   Project.findById(req.params.id, function(err, foundProject) {

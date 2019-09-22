@@ -340,10 +340,38 @@ nav .navigation ul.nav-list li a {
 #assign:focus {
   box-shadow: none;
 }
+#newMembers img {
+  height: 15px;
+  width: 15px;
+  background-color: #ffffff;
+  line-height: 33px;
+  vertical-align: bottom;
+  border-radius: 2px;
+  padding: 1px;
+  margin-right: 5px;
+}
+#newMembers .memList {
+  background-color: white;
+  padding: 8px;
+  border-radius: 3px;
+  margin: 5px 0;
+  display: block;
+}
+
 #membersList li {
   padding: 8px;
   font-size: 14px;
   color: #444;
+}
+#membersList li img {
+  height: 15px;
+  width: 15px;
+  background-color: #ffffff;
+  line-height: 33px;
+  vertical-align: bottom;
+  border-radius: 2px;
+  padding: 1px;
+  margin-right: 5px;
 }
 #membersList li:hover {
   background-color: var(--blue);

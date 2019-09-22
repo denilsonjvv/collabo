@@ -6,6 +6,16 @@ var Task = require("./task"),
 var projectSchema = new mongoose.Schema({
   title: String,
   description: String,
+  members: [
+    {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      },
+      name: String,
+      profileImg: String
+    }
+  ],
   tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,
