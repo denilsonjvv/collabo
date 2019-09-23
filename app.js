@@ -20,7 +20,7 @@ const indexRoutes = require("./routes/index"),
 // require("./config/passport")(passport);
 mongoose.connect(
   "mongodb://localhost/collabo",
-  { useNewUrlParser: true },
+  { useNewUrlParser: true, useFindAndModify: false }, // findeoneandupdate deprecated
   function(err) {
     if (err) {
       console.log(err);
