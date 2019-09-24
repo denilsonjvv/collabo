@@ -86,6 +86,11 @@ router.post("/register", imgUpload.single("profileImg"), function(req, res) {
         errors.push({ msg: "Email is already registered" });
         res.render("register", { errors, name, email, password, password2 });
       } else {
+        function ranNum(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusiv
+        }
         if (profileImg) {
           //check if profile image file is selected
           var userInfo = {
@@ -94,7 +99,12 @@ router.post("/register", imgUpload.single("profileImg"), function(req, res) {
             email: email
           };
         } else {
-          var userInfo = { name: name, email: email }; // , password: password
+          var identiNum = ranNum(1, 6);
+          var userInfo = {
+            name: name,
+            profileImg: "i-" + identiNum + ".png",
+            email: email
+          }; // , password: password
         }
         User.register(new User(userInfo), req.body.password, function(
           err,

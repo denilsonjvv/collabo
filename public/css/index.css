@@ -14,13 +14,6 @@
   display: block;
   margin: 5px 0;
 }
-/* Project data */
-.deleteBtn {
-  padding: 2px 5px;
-}
-.deleteBtn:focus {
-  box-shadow: none;
-}
 /*  TASK LAYOUT   */
 .greybox .taskbox {
   background: #ffffff;

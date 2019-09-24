@@ -4,19 +4,26 @@
 <% include partials/messages %>
 <h1>collabO</h1>
     <section class="greybox" id="activeproj">
-        <h3>Globally Active Projects</h3>
-            <button class="btnlink">
-        <a href="/p/new">Add Project</a>
-    </button>
-        <hr class="line">
-            <% projects.forEach(function(project){ %>
-            <button class="bluelink">
-                <a href="/p/<%= project._id%>"><%= project.title %></a>
+        <h3 class="fl clearfix">Globally Active Projects</h3>
+        <div class="rightFloater">
+            <button class="btnlink fr">
+                <a href="/p/new" data-icon="&#xe044;">Add Project</a>
             </button>
-            <% }) // End of projects.forEach;%>
+        </div>
+        <hr class="line">
+            <% if(projects.length === 0){ %>
+                <p>No projects have been added yet.</p>
+            <%}else{%>
+                <% projects.forEach(function(project){ %>
+                <button class="projLink">
+                    <a href="/p/<%= project._id%>"><%= project.title %></a>
+                </button>
+                <% }) // End of projects.forEach;%>
+            <% } %>
     </section>
     <section class="greybox">
-    <h5>Updates</h5>
+    <h5>Recent Activity</h5>
+    <hr class="line"/>
         <ul id="updateUl">
         <% projects.reverse().forEach(function(project){ %>
             <% project.updates.forEach(function(update){ %>

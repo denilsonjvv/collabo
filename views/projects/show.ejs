@@ -1,35 +1,41 @@
 <% include ../partials/header %>
 
 <div class="container">
-<span class="digit"> ID <%=project.id%> </span>
 <% include ../partials/messages %>
 <section class="greybox">
-    <h4><%= project.title %></h4>
+    <h4 class="fl clearfix"><%= project.title %></h4>
+            <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
+            <div class="options rightFloater">
+                <button class="btnlink">
+                    <a href="/p/<%= project.id %>/edit">Edit</a>
+                </button>
+                <button class="btnlink">
+                    <a href="/p/<%= project.id %>/assign">Add Member</a>
+                </button>
+                <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
+                    <button type="submit" class="btnlink deleteBtn">Delete</button>
+                </form>
+            </div>
+        <% }; %>
+    <hr class="line"/>
     <p><%= project.description %></p>
     <% project.members.forEach(function(member){ %>
-        <span><img src="/pro-img/<%= member.profileImg %>" style="width:15px;height:15px"><%= member.name %></span>
+        <div class="userImgHold">
+            <img src="/pro-img/<%= member.profileImg %>" class="user">
+        </div>
     <% }) %>
-    </br>
-        <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
-            <button class="btnlink">
-                <a href="/p/<%= project.id %>/edit">Edit</a>
-            </button>
-            <button class="btnlink">
-                <a href="/p/<%= project.id %>/assign">Add Member</a>
-            </button>
-            <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
-                <input type="submit" class="deleteBtn btnlink" value="Delete">
-            </form>
-        <% }; %>
 </section>
 <section class="greybox">
-    <h4>Tasks</h4>
+    <h4 class="fl">Tasks</h4>
+    <div class="rightFloater">
+    <button class="btnlink"><a href="/p/<%= project._id %>/newtask" data-icon="&#xe044;">Add New Task</a></button>
+    </div>
     <hr class="line"/>
     <% 
         var amount = project.tasks.length;
         if(amount === 0){
     %>
-        <p class="ctr"> There are no tasks, woop woop! Click here <button class="btnlink"><a href="/p/<%= project._id %>/newtask">+</a></button> to add new task!</p>
+        <p class="ctr"> There are no tasks, yet. Click "Add New Task" button to add your first task!</p>
     <% }else{ %>
     <% project.tasks.forEach(function(task){ %>
     <div class="taskbox">

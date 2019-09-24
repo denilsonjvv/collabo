@@ -10,7 +10,6 @@
       <% }else { %>
         <h3>New task in <span class="highlight"><%= project.title %></h3>
       <% } %>
-    <span class="digit">Project ID <%= project.id %></span>
     <hr class="line">
     <form action="/p/<%= project._id %>" method="POST">
       <div class="block">
@@ -28,9 +27,9 @@
       </div>
       <div class="block">
           <label for="assigned">Assign To</label>
-          <% user.forEach(function(user){ %>
-            <input type="checkbox" id="assigned" name="assigned" value="<%= user.name %>" aria-describedby="assigned">
-                <%= user.name %>
+          <% project.members.forEach(function(member){ %>
+            <input type="checkbox" id="assigned" name="assigned" value="<%= member.name %>" aria-describedby="assigned">
+                <img src="/pro-img/<%=member.profileImg%>"><%= member.name %>
             </input><br>
           <% }); %>
       </div>

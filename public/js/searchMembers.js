@@ -10,18 +10,18 @@ function addMember() {
       let memProImg = this.getAttribute("data-img");
       let newName = this.textContent; //innerHtml (name)
       let inputStr =
-        "<div class='memList'><input type='checkbox' name='members' value='" +
+        "<label class='checkbox-label'><input type='checkbox' name='members' value='" +
         memId +
-        "' checked><img src='/pro-img/" +
+        "' checked></input><span class='checkbox-custom'></span><img src='/pro-img/" +
         memProImg +
         "'>" +
         newName +
-        "</input></div>";
+        "</label>";
       memberIds.push(memId);
       if (submitBtn.length === 0) {
-        let theString =
-          "<button class='submit bluelink' type='submit'>Add Members Selected </button>";
-        memForm.insertAdjacentHTML("beforeend", theString);
+        let theButtonStr =
+          "<button class='submit btnlink' type='submit'>Add Members Selected </button>";
+        memForm.insertAdjacentHTML("beforeend", theButtonStr);
       }
       memForm.insertAdjacentHTML("beforeend", inputStr);
     });
@@ -52,17 +52,18 @@ var showResults = debounce(function(arg) {
         );
       } else {
         data.forEach(x => {
-          membersList.append(
+          console.log(x);
+          var outputHTML =
             "<li class='lis' data-img='" +
-              x.profileImg +
-              "' data-memId='" +
-              x._id +
-              "'><img src='/pro-img/" +
-              x.profileImg +
-              "'>" +
-              x.name +
-              "</li>"
-          );
+            x.profileImg +
+            "' data-memId='" +
+            x._id +
+            "'><img src='/pro-img/" +
+            x.profileImg +
+            "'>" +
+            x.name +
+            "</li>";
+          membersList.append(outputHTML);
         });
         list = document.querySelectorAll(".lis");
         addMember();

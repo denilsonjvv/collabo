@@ -27,7 +27,9 @@ router.get("/search", function(req, res, next) {
       });
       res.json(data);
     }
-  ).limit(10);
+  )
+    .sort({ name: 1 })
+    .limit(10);
 });
 
 //Show Post Form

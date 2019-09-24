@@ -29,10 +29,12 @@
   font-family: "eightyshades";
   content: attr(data-icon);
   font-weight: normal;
-  line-height: 1;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
-  color: #666;
+  color: inherit;
+  margin-right: 8px;
+  bottom: -2px;
+  position: relative;
 }
 
 .sfFont {
@@ -48,7 +50,7 @@
   --pink: #ff49df;
   --lightgrey: #f7f7f7;
   --blue: #007eff;
-  --black: #232323;
+  --black: #444;
 }
 /* Font Links */
 /* Normalize and Config */
@@ -97,9 +99,9 @@ p {
   margin: 10px 0;
 }
 a {
+  color: inherit;
   text-decoration: none;
   display: inline-block;
-
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
@@ -112,10 +114,6 @@ a:active {
 }
 a:visited {
   color: inherit;
-}
-
-a:hover {
-  opacity: 0.8;
 }
 ul {
   list-style: none;
@@ -135,9 +133,6 @@ label {
   color: #404040;
 }
 
-input.btnlink:hover {
-  opacity: 0.8;
-}
 textarea {
   font: inherit;
   max-width: 100%;
@@ -164,25 +159,21 @@ textarea:focus {
   display: inline-block;
   font-family: "SF Mono Regular";
   font-size: 0.7em;
-  color: #007eff;
-  background: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  text-transform: uppercase;
-}
-.bluelink {
   color: white;
-  background: #43c2ff;
-  border: 1px solid #007ed8;
-  border-radius: 3px;
+  background: var(--blue);
+  border: 1px solid #0053a9;
+  border-radius: unset;
+  cursor: pointer;
 }
-.submitBtn {
-  padding: 10px;
+.btnlink:hover {
+  -webkit-box-shadow: inset 0px 15px 5px -15px rgba(0, 67, 133, 1);
+  -moz-box-shadow: inset 0px 15px 5px -15px rgba(0, 67, 133, 1);
+  box-shadow: inset 0px 15px 5px -15px rgba(0, 67, 133, 1);
 }
-.submitBtn:hover {
-  opacity: 0.8;
+.btnlink:focus {
+  text-shadow: 0 0 3px 5px black;
 }
+
 button {
   display: inline-block;
   padding: 0;
@@ -190,7 +181,7 @@ button {
 button a,
 button input {
   color: inherit;
-  padding: 2px 5px;
+  padding: 6px;
   display: inline-block;
 }
 /*Small Hacks*/
@@ -198,10 +189,13 @@ hr.line {
   width: 100%;
   border: 0;
   height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid #ddd;
 }
 .fl {
   float: left;
+}
+.fr {
+  float: right;
 }
 .ctr {
   text-align: center;
@@ -218,21 +212,21 @@ hr.line {
 
 /* HOMEPAGE STYLE BELOW */
 img.user {
+  display: block;
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
-
-.container {
+.userImgHold {
   position: relative;
-  width: 600px;
-  margin: 0 auto;
+  display: inline-block;
 }
 nav {
   position: relative !important;
-  background-color: #313850;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
 }
 #logged {
-  background-color: #394367;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -244,7 +238,7 @@ nav .navigation {
   justify-content: flex-end;
 }
 nav .navigation a {
-  color: white;
+  color: #444;
 }
 nav .navigation ul.nav-list {
   display: flex;
@@ -270,13 +264,17 @@ nav .navigation ul.nav-list li a {
   border-radius: 3px;
   text-transform: uppercase;
 }
-
+.container {
+  position: relative;
+  width: 700px;
+  margin: 0 auto;
+}
 .greybox {
   position: relative;
   padding: 15px;
-  margin: 10px 0;
   background-color: #f3f3f3;
-  border-radius: 5px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 
 .greybox h1,
@@ -286,6 +284,11 @@ h4,
 h5,
 h6 {
   margin-top: 0px;
+}
+.rightFloater {
+  float: right;
+  position: relative;
+  top: -5px;
 }
 
 .timeline {
@@ -309,10 +312,10 @@ h6 {
 }
 #updateUl li {
   background-color: #f2f5ff;
-  border: 2px solid#c8d8ff;
+  border: 1px solid#c8d8ff;
 }
 #updateUl li:hover {
-  border: 2px solid#81a5ff;
+  border: 1px solid#81a5ff;
   cursor: pointer;
 }
 #updateUl li a {

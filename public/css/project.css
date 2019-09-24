@@ -11,21 +11,94 @@
   box-shadow: none;
 }
 #newMembers img {
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   background-color: #ffffff;
-  line-height: 33px;
-  vertical-align: bottom;
+  vertical-align: middle;
   border-radius: 2px;
   padding: 1px;
   margin-right: 5px;
 }
-#newMembers .memList {
+#newMembers .userDisplay {
   background-color: white;
   padding: 8px;
   border-radius: 3px;
   margin: 5px 0;
   display: block;
+}
+.checkbox-label {
+  background: white;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  line-height: 30px;
+  height: 30px;
+  clear: both;
+  margin: 5px auto;
+}
+.checkbox-label input {
+  z-index: 2;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkbox-label img {
+  z-index: 2;
+  margin-left: 8px;
+}
+.checkbox-label .checkbox-custom {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.checkbox-label .checkbox-custom::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.45);
+}
+.checkbox-label input:checked ~ .checkbox-custom::before {
+  opacity: 1;
+  background-color: transparent;
+}
+.checkbox-label .checkbox-custom::after {
+  position: absolute;
+  content: "";
+  left: 15px;
+  top: 12px;
+  height: 0px;
+  width: 0px;
+  border-radius: 5px;
+  border: solid #444;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  opacity: 0;
+}
+.checkbox-label input:checked ~ .checkbox-custom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+  top: 4px;
+  left: 14px;
+  width: 6px;
+  height: 15px;
+  border: solid #444;
+  border-width: 0 3px 3px 0;
+  background-color: transparent;
+  border-radius: 0;
 }
 
 #membersList li {
@@ -64,6 +137,22 @@
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+/*Button styles*/
+.projLink {
+  color: white;
+  background: rgb(130, 130, 219);
+  border: 1px solid #5e568c;
+}
+.submitBtn {
+  padding: 10px;
+}
+.deleteBtn {
+  padding: 6px;
+}
+.deleteBtn:focus {
+  box-shadow: none;
 }
 .submit {
   padding: 5px;
