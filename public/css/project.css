@@ -1,0 +1,71 @@
+/* search members POPUP style */
+.loading {
+  background-color: #ffffff;
+  background-image: url("/images/loader.gif");
+  background-size: 15px 15px;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+}
+#assign:focus {
+  box-shadow: none;
+}
+#newMembers img {
+  height: 15px;
+  width: 15px;
+  background-color: #ffffff;
+  line-height: 33px;
+  vertical-align: bottom;
+  border-radius: 2px;
+  padding: 1px;
+  margin-right: 5px;
+}
+#newMembers .memList {
+  background-color: white;
+  padding: 8px;
+  border-radius: 3px;
+  margin: 5px 0;
+  display: block;
+}
+
+#membersList li {
+  padding: 8px;
+  font-size: 14px;
+  color: #444;
+}
+#membersList li img {
+  height: 15px;
+  width: 15px;
+  background-color: #ffffff;
+  line-height: 33px;
+  vertical-align: bottom;
+  border-radius: 2px;
+  padding: 1px;
+  margin-right: 5px;
+}
+#membersList li:hover {
+  background-color: var(--blue);
+  color: white;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+#membersList span {
+  display: inline-block;
+  padding: 8px;
+  color: #bbb;
+  font-size: 14px;
+}
+#memberPopup {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+.submit {
+  padding: 5px;
+  cursor: pointer;
+}

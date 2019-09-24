@@ -2,7 +2,9 @@
 @import url("https://fonts.googleapis.com/css?family=Asap:400,600&display=swap");
 /* string import */
 @import "./index.css";
+@import "./errors.css";
 @import "./profile.css";
+@import "./project.css";
 
 /* Orig Font */
 @font-face {
@@ -120,38 +122,6 @@ ul {
   margin: 0;
   padding: 0;
 }
-.timeline {
-  position: relative;
-  height: 4px;
-  width: 4px;
-  background-color: #c8d8ff;
-  margin-left: 4px;
-}
-.timelineExtend {
-  height: 12px;
-  width: 8px;
-  background-color: #5c87ff;
-  margin-left: 4px;
-}
-#updateUl {
-  font-size: 13px;
-  color: var(--black);
-  margin: 0;
-  padding: 0;
-}
-#updateUl li {
-  background-color: #f2f5ff;
-  border: 2px solid#c8d8ff;
-}
-#updateUl li:hover {
-  border: 2px solid#81a5ff;
-  cursor: pointer;
-}
-#updateUl li a {
-  width: 100%;
-  padding: 5px;
-  color: var(--black);
-}
 input:focus,
 button:focus,
 textarea:focus {
@@ -246,7 +216,12 @@ hr.line {
 }
 /* https://www.w3schools.com/howto/howto_css_clearfix.asp */
 
-/* Start */
+/* HOMEPAGE STYLE BELOW */
+img.user {
+  width: 20px;
+  height: 20px;
+}
+
 .container {
   position: relative;
   width: 600px;
@@ -284,25 +259,6 @@ nav .navigation ul.nav-list li a {
   padding: 10px;
   font-size: 0.9em;
 }
-/* Error handling */
-.msg {
-  margin: 10px auto;
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 5px;
-}
-.err_msg {
-  background: #ffe9e2;
-  color: #e02c2c;
-}
-.suc_msg {
-  background: #e5f3ff;
-  color: #1eace2;
-}
-.info_msg {
-  background: #fff4e8;
-  color: #c58800;
-}
 
 /* Main CSS */
 /* Font for digits */
@@ -332,74 +288,35 @@ h6 {
   margin-top: 0px;
 }
 
-/* search members POPUP style */
-.loading {
-  background-color: #ffffff;
-  background-image: url("/images/loader.gif");
-  background-size: 15px 15px;
-  background-position: right center;
-  background-repeat: no-repeat;
-  background-origin: content-box;
+.timeline {
+  position: relative;
+  height: 4px;
+  width: 4px;
+  background-color: #c8d8ff;
+  margin-left: 4px;
 }
-#assign:focus {
-  box-shadow: none;
+.timelineExtend {
+  height: 12px;
+  width: 8px;
+  background-color: #5c87ff;
+  margin-left: 4px;
 }
-#newMembers img {
-  height: 15px;
-  width: 15px;
-  background-color: #ffffff;
-  line-height: 33px;
-  vertical-align: bottom;
-  border-radius: 2px;
-  padding: 1px;
-  margin-right: 5px;
+#updateUl {
+  font-size: 13px;
+  color: var(--black);
+  margin: 0;
+  padding: 0;
 }
-#newMembers .memList {
-  background-color: white;
-  padding: 8px;
-  border-radius: 3px;
-  margin: 5px 0;
-  display: block;
+#updateUl li {
+  background-color: #f2f5ff;
+  border: 2px solid#c8d8ff;
 }
-
-#membersList li {
-  padding: 8px;
-  font-size: 14px;
-  color: #444;
-}
-#membersList li img {
-  height: 15px;
-  width: 15px;
-  background-color: #ffffff;
-  line-height: 33px;
-  vertical-align: bottom;
-  border-radius: 2px;
-  padding: 1px;
-  margin-right: 5px;
-}
-#membersList li:hover {
-  background-color: var(--blue);
-  color: white;
+#updateUl li:hover {
+  border: 2px solid#81a5ff;
   cursor: pointer;
-  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 }
-#membersList span {
-  display: inline-block;
-  padding: 8px;
-  color: #bbb;
-  font-size: 14px;
-}
-#memberPopup {
-  overflow: hidden;
-  background-color: white;
-  border-radius: 3px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-}
-.submit {
+#updateUl li a {
+  width: 100%;
   padding: 5px;
-  cursor: pointer;
+  color: var(--black);
 }
