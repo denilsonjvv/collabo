@@ -7,7 +7,8 @@
     <span class="digit">Project ID <%= project.id %></span>
     <hr class="line">
 		<form>
-			<input type="text" id="assign" onkeyup="showResults(this.value)" placeholder="Search members">
+			<p>Search and select member from dropdown</p>
+			<input type="text" id="assign" onkeyup="showResults(this.value)" placeholder="Search members" autofocus>
 			<div id="memberPopup">
 				<ul id="membersList">
 				</ul>
@@ -16,7 +17,7 @@
   </div>
 	<div class="greybox">
 		<h4>Members List</h4>
-		<form id="newMembers">
+		<form action="/p/<%= project.id %>/assign" method="POST" id="newMembers">
 		</form>
 	</div>
 </div>

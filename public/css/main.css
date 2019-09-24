@@ -324,7 +324,12 @@ nav .navigation ul.nav-list li a {
   border-radius: 5px;
 }
 
-.greybox h3 {
+.greybox h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 0px;
 }
 
@@ -394,4 +399,8 @@ nav .navigation ul.nav-list li a {
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+.submit {
+  padding: 5px;
+  cursor: pointer;
 }

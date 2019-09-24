@@ -83,7 +83,7 @@ router.post("/", auth.userIsLogged, function(req, res) {
             "success_msg",
             "Your new project has been created, check it out below!"
           );
-          res.redirect("/p/" + newProject._id + "/newtask"); //redirect back to campgrounds page
+          res.redirect("/p/" + newProject._id + "/assign"); //redirect back to campgrounds page
         }
       });
     }
@@ -108,6 +108,34 @@ router.get("/:id/assign", auth.checkIfOwner, auth.userIsLogged, function(
     }
   });
 });
+//Add members to project route ** Needs Work And Attention **
+router.post("/:id/assign", auth.userIsLogged, function(req, res) {
+  var memIds = req.body.members; //array of ids
+  User.find({ _id: memIds }, function(err, usersFound) {
+    if (err) {
+      console.log(err);
+    } else {
+      Project.findByIdAndUpdate(
+        req.params.id,
+        { members: usersFound },
+        { useFindAndModify: false },
+        function(err, updated) {
+          if (err) {
+            req.flash(
+              "info_msg",
+              "There was a problem while adding members to your project, try again."
+            );
+            res.redirect("/");
+          } else {
+            req.flash("success_msg", "Congrats, your members were updated!");
+            res.redirect("/p/" + req.params.id + "/newtask");
+          }
+        }
+      );
+    }
+  });
+});
+
 //Edit project page
 router.get("/:id/edit", auth.checkIfOwner, auth.userIsLogged, function(
   req,
@@ -121,6 +149,10 @@ router.get("/:id/edit", auth.checkIfOwner, auth.userIsLogged, function(
       );
       res.redirect("/");
     } else {
+      req.flash(
+        "success_msg",
+        "Your project page has been updated successfully."
+      );
       res.render("projects/edit", { project });
     }
   });

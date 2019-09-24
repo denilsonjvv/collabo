@@ -1,12 +1,11 @@
 <% include ../partials/header %>
 
 <div class="container">
+  <% include ../partials/messages %>
   <div class="greybox">
-    <% 
-    //check if there are any tasks
+      <%  //check if there are any tasks
       let mytasks = project.tasks[0];
-      if(mytasks === undefined){
-        %>
+      if(mytasks === undefined){ %>
         <h4>Add your first task to project <span class="highlight"><%= project.title %></span>!</h4>
       <% }else { %>
         <h3>New task in <span class="highlight"><%= project.title %></h3>

@@ -1,26 +1,31 @@
 //Search members to project function
 let memberIds = [];
 let list;
-
+let submitBtn = document.getElementsByClassName("submit");
 function addMember() {
   let memForm = document.getElementById("newMembers");
   for (var i = 0; i < list.length; i++) {
     list[i].addEventListener("click", function() {
-      let att = this.getAttribute("data-memId"); // member Id from data Attribute
+      let memId = this.getAttribute("data-memId"); // member Id from data Attribute
       let memProImg = this.getAttribute("data-img");
-      memberIds.push(att);
       let newName = this.textContent; //innerHtml (name)
       let inputStr =
         "<div class='memList'><input type='checkbox' name='members' value='" +
-        newName +
-        "' disabled='disabled' checked><img src='/pro-img/" +
+        memId +
+        "' checked><img src='/pro-img/" +
         memProImg +
         "'>" +
         newName +
         "</input></div>";
+      memberIds.push(memId);
+      if (submitBtn.length === 0) {
+        let theString =
+          "<button class='submit bluelink' type='submit'>Add Members Selected </button>";
+        memForm.insertAdjacentHTML("beforeend", theString);
+      }
       memForm.insertAdjacentHTML("beforeend", inputStr);
     });
-  }
+  } // end of for loop
 }
 
 //--------------
@@ -32,10 +37,10 @@ var showResults = debounce(function(arg) {
   input.addClass("loading");
   if (value == "" || value.length <= 0) {
     input.removeClass("loading");
-    popup.hide();
+    popup.fadeOut();
     return;
   } else {
-    popup.show();
+    popup.fadeIn();
   }
   var jqxhr = $.get("/p/search?q=" + value, function(data) {
     membersList.html("");
@@ -59,7 +64,6 @@ var showResults = debounce(function(arg) {
               "</li>"
           );
         });
-
         list = document.querySelectorAll(".lis");
         addMember();
       }
