@@ -26,7 +26,6 @@
 [data-icon]:before {
   font-family: "eightyshades";
   content: attr(data-icon);
-  speak: none;
   font-weight: normal;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
