@@ -5,7 +5,7 @@
     <div class="header">
       <h2>Register</h2>
       <hr class="line">
-      <form action="/user/register" method="POST" enctype="multipart/form-data">
+      <form action="/user/register" method="POST">
         <div class="block">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" 
@@ -13,18 +13,18 @@
           />
         </div>
         <div class="block">
-          <label for="inputFile">Profile Image</label>
-          <div class="setting image_picker">
-            <div class="settings_wrap">
-              <label class="drop_target">
-                <i class="fas fa-file-upload"></i>
-                <div class="image_preview"></div>
-                <input id="inputFile" type="file" name="profileImg"
-                value="<%= typeof profileImg != 'undefined' ? profileImg : '' %>"/>
-              </label>
+          <label for="inputFile">Avatar</label>
+          <div class="imagePicker">
+            <div id="ranAvatarBtn" class="simptip-position-right simptip-fade" data-tooltip="Generate a random avatar">
+              <i class="fas fa-random"></i>
             </div>
+              <div class="avatarHold">
+                <div class="avatarPreview"></div>
+                <input id="avatarInput" type="text" name="profileImg"
+                value="<%= typeof profileImg != 'undefined' ? profileImg : '' %>" hidden/>
+              </div>
           </div>
-          <div class="pre-info msg suc_msg d-none"></div>
+          <div class="infoPreview msg info_msg file_msg d-none"></div>
         </div>
         <div class="block">
           <label for="email">Email</label>
@@ -48,76 +48,13 @@
           Register
         </button>
       </form>
-      <p>Have An Account? <a href="/user/login">Login</a></p>
+      <p>Already have an account? <a href="/user/login">Login</a></p>
     </div>
   </div>
 </div>
 
 <!-- Image Preview Function  -->
-<script>
-  var $dropzone = $('.image_picker'),
-      $droptarget = $('.drop_target'),
-      $dropinput = $('#inputFile'),
-      $dropimg = $('.image_preview'),
-      $infoPreview = $('.pre-info');
-
-  $dropzone.on('dragover', function() {
-    $droptarget.addClass('dropping');
-    return false;
-  });
-
-  $dropzone.on('dragend dragleave', function() {
-    $droptarget.removeClass('dropping');
-    return false;
-  });
-
-  $dropzone.on('drop', function(e) {
-    $droptarget.removeClass('dropping');
-    $droptarget.addClass('dropped');
-    e.preventDefault();
-    
-    var file = e.originalEvent.dataTransfer.files[0],
-        reader = new FileReader();
-
-    reader.onload = function(event) {
-      $dropimg.css('background-image', 'url(' + event.target.result + ')');
-    };
-    
-    console.log(file);
-    reader.readAsDataURL(file);
-    imageInfo(file);
-    return false;
-  });
-
-  $dropinput.change(function(e) {
-    $droptarget.addClass('dropped');
-    $('.image_title input').val('');
-    
-    var file = $dropinput.get(0).files[0],
-        reader = new FileReader();
-    
-    reader.onload = function(event) {
-      $dropimg.css('background-image', 'url(' + event.target.result + ')');
-    }
-    console.log(file);
-    reader.readAsDataURL(file);
-    imageInfo(file);
-  });
-  function imageInfo(file){
-    if(file.size >= 10200){
-      var fileSize = "File size must be under 10KB" ;
-      $infoPreview.removeClass('suc_msg');
-      $infoPreview.addClass('err_msg');
-    }else if(file.size <= 10200){
-      $infoPreview.addClass('suc_msg');
-      $infoPreview.removeClass('err_msg');
-      var fileSize = "File size: " + file.size + " Bytes";
-    }
-    var fileInfoStr = fileSize +" "+ file.type;
-    $infoPreview.removeClass('d-none');
-    $infoPreview.html(fileInfoStr);
-  }
-</script>
+<script src="/js/renderImage.js"></script>
 
 
 <% include ./partials/footer %>

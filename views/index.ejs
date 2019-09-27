@@ -16,7 +16,7 @@
             <%}else{%>
                 <% projects.forEach(function(project){ %>
                 <button class="projLink">
-                    <a href="/p/<%= project._id%>"><%= project.title %></a>
+                    <a href="/p/<%= project._id%>" data-icon="&#xe024;"><%= project.title %></a>
                 </button>
                 <% }) // End of projects.forEach;%>
             <% } %>
