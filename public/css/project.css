@@ -11,11 +11,12 @@
   box-shadow: none;
 }
 #newMembers img {
-  height: 20px;
-  width: 20px;
+  height: 40px;
+  width: 40px;
   background-color: #ffffff;
   vertical-align: middle;
-  border-radius: 2px;
+  align-items: center;
+  border-radius: 3px;
   padding: 1px;
   margin-right: 5px;
 }
@@ -145,8 +146,13 @@
   background: rgb(130, 130, 219);
   border: 1px solid #5e568c;
 }
+.projLink:hover {
+  border: 1px solid #6c63a0;
+  background: #9898f5;
+}
 .submitBtn {
   padding: 10px;
+  margin-top: 10px;
 }
 .deleteBtn {
   padding: 6px;

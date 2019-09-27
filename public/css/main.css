@@ -47,10 +47,11 @@
 }
 /* Root Colors */
 :root {
-  --pink: #ff49df;
+  --white: #efefef;
   --lightgrey: #f7f7f7;
   --blue: #007eff;
   --black: #444;
+  --avatarBG: #4e4e4e;
 }
 /* Font Links */
 /* Normalize and Config */
@@ -99,21 +100,21 @@ p {
   margin: 10px 0;
 }
 a {
-  color: inherit;
+  color: var(--blue);
   text-decoration: none;
   display: inline-block;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
 }
-a.link {
-  color: inherit;
+a:link {
+  color: var(--blue);
 }
 a:active {
-  color: inherit;
+  color: var(--blue);
 }
 a:visited {
-  color: inherit;
+  color: var(--blue);
 }
 ul {
   list-style: none;
@@ -143,7 +144,6 @@ input,
 textarea {
   background-color: white;
   border: 1px solid #989898;
-  border-radius: 3px;
   padding: 8px;
   font-size: 0.9em;
   width: 100%;
@@ -157,8 +157,6 @@ textarea:focus {
 }
 .btnlink {
   display: inline-block;
-  font-family: "SF Mono Regular";
-  font-size: 0.7em;
   color: white;
   background: var(--blue);
   border: 1px solid #0053a9;
@@ -166,12 +164,8 @@ textarea:focus {
   cursor: pointer;
 }
 .btnlink:hover {
-  -webkit-box-shadow: inset 0px 15px 5px -15px rgba(0, 67, 133, 1);
-  -moz-box-shadow: inset 0px 15px 5px -15px rgba(0, 67, 133, 1);
-  box-shadow: inset 0px 15px 5px -15px rgba(0, 67, 133, 1);
-}
-.btnlink:focus {
-  text-shadow: 0 0 3px 5px black;
+  background: #59abff;
+  border: 1px solid #007dff;
 }
 
 button {
@@ -180,7 +174,9 @@ button {
 }
 button a,
 button input {
-  color: inherit;
+  color: var(
+    --white
+  ) !important; /* necessary for overwriting a:link color inherit*/
   padding: 6px;
   display: inline-block;
 }
@@ -213,13 +209,23 @@ hr.line {
 /* HOMEPAGE STYLE BELOW */
 img.user {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
   cursor: pointer;
 }
 .userImgHold {
   position: relative;
   display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-color: #ffffff;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 3px;
+  padding: 1px;
+  margin-right: 5px;
+  overflow: hidden;
 }
 nav {
   position: relative !important;
@@ -276,6 +282,9 @@ nav .navigation ul.nav-list li a {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
+.greybox:last-of-type {
+  border-bottom: 1px solid #ddd;
+}
 
 .greybox h1,
 h2,
@@ -322,4 +331,55 @@ h6 {
   width: 100%;
   padding: 5px;
   color: var(--black);
+}
+
+/*-- REGISTER /FILE READER --*/
+.imagePicker {
+  display: inline-block;
+  z-index: 1;
+}
+#inputFile {
+  display: none;
+}
+.imagePicker > .loading {
+  z-index: 3;
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-position: center;
+  background-size: 20px 20px;
+  border-radius: 3px;
+}
+.avatarHold {
+  margin: 0;
+  z-index: 2;
+}
+#ranAvatarBtn {
+  font-size: 12px;
+  color: white;
+  background-color: var(--blue);
+  padding: 3px;
+  border-radius: 3px;
+  margin: 3px 0;
+  cursor: pointer;
+}
+#ranAvatarBtn:active {
+  box-shadow: inset 0 0 5px 2px #004082;
+}
+.avatarPreview {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  cursor: pointer;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--avatarBG);
+}
+.imagePreview:hover {
+  -webkit-box-shadow: 0px 0px 0px 1px var(--blue);
+  -moz-box-shadow: 0px 0px 0px 1px var(--blue);
+  box-shadow: 0px 0px 0px 1px var(--blue);
 }
