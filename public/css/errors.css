@@ -1,0 +1,24 @@
+/* Error handling */
+.msg {
+  margin: 10px auto;
+  padding: 8px;
+  font-size: 14px;
+}
+.err_msg {
+  background: #ffe9e2;
+  color: #e02c2c;
+}
+.suc_msg {
+  background: #e5f3ff;
+  color: #1eace2;
+}
+.info_msg {
+  background: #fff4e8;
+  color: #c58800;
+}
+
+.file_msg {
+  font-size: 12px;
+  border-radius: unset;
+  border: 1px solid #c58800;
+}

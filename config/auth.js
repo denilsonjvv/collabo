@@ -13,18 +13,17 @@ middlewareObj.userIsLogged = function(req, res, next) {
 middlewareObj.checkIfOwner = function(req, res, next) {
   if (req.isAuthenticated()) {
     //find the Project with ID
-    Project.findById(req.params.id, function(err, foundProject) {
+    Project.findById(req.params.id || req.params.proj_id, function(
+      err,
+      foundProject
+    ) {
       if (err) {
-        res.redirect("back");
-        req.flash("info_msg", "You must be logged in to access this page.");
+        res.render("errors/project", { projectID: req.params.id });
       } else {
         if (foundProject.author.id.equals(req.user._id)) {
           next();
         } else {
-          req.flash(
-            "info_msg",
-            "You are not the authorized owner of this post."
-          );
+          req.flash("info_msg", "You are not the authorized owner.");
           res.redirect("back");
         }
       }

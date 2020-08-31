@@ -4,6 +4,7 @@
     <title>collabO - Team Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/tooltip/simptip.css" />
 
     <link
       rel="stylesheet"
@@ -21,17 +22,26 @@
   </head>
   <body>
     <nav>
+        <div id="logged"class="fl clearfix">
+          <% if(currentUser){ %>
+            <span class="digit sfFont">
+              <a href="/profile/<%= currentUser._id %>">
+                Logged In As <%= currentUser.name %> - ID <%= currentUser._id %>
+              </a>
+            </span>
+          <% }else{ %>
+                <span class="digit sfFont">No user logged in</span>
+          <% } %>
+        </div>
       <div class="navigation">
         <ul class="nav-list">
           <% if(currentUser){ %>
-            <li class="digit sfFont">Logged In As <%= currentUser.name %></li>
-            <li><a href="/profile/<%= currentUser._id %>">Profile</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile/<%=currentUser._id%>">Profile</a></li>
+            <li><a href="/user/logout">Logout</a></li>
           <% }else{ %>
-                <li class="digit sfFont">No user logged in</li>
+            <li><a href="/user/login">Login</a></li>
           <% } %>
-          <li><a href="/">Home</a></li>
-          <li><a href="/user/login">Login<em class="sfFont">(Beta)</em></a></li>
-          <li><a href="/user/logout">Logout</a></li>
         </ul>
       </div>
     </nav>

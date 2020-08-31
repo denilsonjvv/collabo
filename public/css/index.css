@@ -3,141 +3,14 @@
   margin: 50px auto;
   display: flex;
 }
-
-.main .blog-area {
-  flex-direction: row;
-}
-.main .blog-area .newBlog {
-  background-color: #1f88ff;
-  border: 1px solid #0077ff;
-  color: white;
-  padding: 5px;
-  border-radius: 2px;
-  margin: 10px 0;
-  cursor: pointer;
-}
-.main .blog-area .newBlog :hover {
-  opacity: 0.8;
-}
-
-.blog-area .blog-box {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  width: 125px;
-  height: 125px;
-}
-
-.blog-area .blog-content {
-  margin-bottom: 50px;
-}
-
-.blog-infoBox {
-  margin: 0 auto;
-  padding: 25px 0;
-}
-.blog-infoBox p {
-  font-size: 15px;
-  font-family: "Arimo", sans-serif;
-}
-.blog-infoBox h2 {
-  margin: 0;
-  width: 75%;
-  text-transform: uppercase;
-}
-.blog-infoBox h2 a {
-  color: #333;
-}
-.blog-infoBox .info {
-  text-transform: uppercase;
-  font-size: 11px;
-  color: #bdbdbd;
-  cursor: default;
-}
-.blog-infoBox .info span {
-  color: var(--pink);
-  font-weight: bold;
-}
-.blog-infoBox .info span :hover {
-  text-decoration: underline;
-}
-.blog-infoBox .info .far {
-  padding-right: 3px;
-}
-.blog-infoBox .blogLink2 {
+.deleteForm {
   display: inline-block;
-  font-weight: 600;
-  font-size: 13px;
-  color: #c09ef5;
-  transition: all 500ms;
 }
-.blog-infoBox a {
-  color: inherit;
-}
-
 .container {
   width: 80%;
   margin: 0 auto;
 }
 .container .block {
   display: block;
+  margin: 5px 0;
 }
-.container .block #title {
-  border: none;
-  font-size: 20px;
-  padding: 5px 10px;
-  border-bottom: 1px solid #ccc;
-  color: #bbb;
-  font: 12px;
-}
-.container .block #upload {
-  display: block;
-  padding: 5px;
-  border: 1px solid #3e3efc;
-  background: white;
-  color: #3e3efc;
-  font-size: bold;
-  cursor: pointer;
-}
-/*  TASK LAYOUT   */
-.greybox .taskbox {
-  background: #ffffff;
-  margin: 15px auto;
-  border-radius: 5px;
-  text-align: center;
-  padding: 5px 0 15px;
-}
-.greybox .taskbox span {
-  text-transform: uppercase;
-  font-size: 0.76rem;
-  color: white;
-  padding: 2px 5px;
-  border-radius: 3px;
-  font-family: "SF Mono Regular";
-}
-.greybox .taskbox .grpAssigned {
-  display: inline-block;
-}
-.greybox .taskbox .assigned {
-  background-color: #0084ff;
-  text-transform: lowercase;
-}
-.greybox .taskbox .priority {
-  background-color: #ff7b00;
-}
-#priohigh {
-  background-color: #ffe2e2;
-  color: red;
-}
-#priomid {
-  color: orange;
-}
-#priolow {
-  color: yellow;
-}
-.greybox .taskbox .dueDate {
-  background-color: #333;
-}
-
-/*# sourceMappingURL=index.css.map */
