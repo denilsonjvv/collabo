@@ -41,7 +41,7 @@ router.get("/:id", auth.userIsLogged, function(req, res) {
   Project.findById(req.params.id)
     .populate("tasks")
     .exec(function(err, foundProject) {
-      if (err && "") {
+      if (err) {
         res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
       } else {
         res.render("projects/show", { project: foundProject });

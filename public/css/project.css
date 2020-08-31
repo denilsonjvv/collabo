@@ -11,8 +11,8 @@
   box-shadow: none;
 }
 #newMembers img {
-  height: 40px;
-  width: 40px;
+  height: 20px;
+  width: 20px;
   background-color: #ffffff;
   vertical-align: middle;
   align-items: center;
@@ -80,7 +80,7 @@
   height: 0px;
   width: 0px;
   border-radius: 5px;
-  border: solid #444;
+  border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(0deg) scale(0);
   -ms-transform: rotate(0deg) scale(0);
@@ -96,12 +96,20 @@
   left: 14px;
   width: 6px;
   height: 15px;
-  border: solid #444;
+  border: solid white;
   border-width: 0 3px 3px 0;
   background-color: transparent;
   border-radius: 0;
 }
 
+#memberPopup {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 0 0 3px 3px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
 #membersList li {
   padding: 8px;
   font-size: 14px;
@@ -110,10 +118,10 @@
 #membersList li img {
   height: 15px;
   width: 15px;
-  background-color: #ffffff;
+  background-color: #f5f5f5;
   line-height: 33px;
   vertical-align: bottom;
-  border-radius: 2px;
+  border-radius: 3px;
   padding: 1px;
   margin-right: 5px;
 }
@@ -131,13 +139,21 @@
   color: #bbb;
   font-size: 14px;
 }
-#memberPopup {
-  overflow: hidden;
-  background-color: white;
-  border-radius: 3px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+
+/*  TASK LAYOUT   */
+.greybox .taskbox {
+  background-color: #f2f5ff;
+  border: 1px solid#c8d8ff;
+  margin: 15px auto;
+  padding: 5px;
+}
+.taskbox span {
+  color: var(--black);
+}
+
+/*  New Task Style     */
+input[type="checkbox"] {
+  width: auto;
 }
 
 /*Button styles*/

@@ -1,47 +1,51 @@
 <% include partials/header %>
 
-<div class="container">
-<% include partials/messages %>
-<h1>collabO</h1>
-    <section class="greybox" id="activeproj">
-        <h3 class="fl clearfix">Globally Active Projects</h3>
-        <div class="rightFloater">
-            <button class="btnlink fr">
-                <a href="/p/new" data-icon="&#xe044;">Add Project</a>
-            </button>
-        </div>
-        <hr class="line">
-            <% if(projects.length === 0){ %>
-                <p>No projects have been added yet.</p>
-            <%}else{%>
-                <% projects.forEach(function(project){ %>
-                <button class="projLink">
-                    <a href="/p/<%= project._id%>" data-icon="&#xe024;"><%= project.title %></a>
+<div class="container clearfix">
+    <% include partials/messages %>
+    <% include partials/userSection %>
+    <section class="mainSection">
+        <section class="greybox" id="activeproj">
+            <h3 class="fl clearfix">Globally Active Projects</h3>
+            <div class="rightFloater">
+                <button class="btnlink fr">
+                    <a href="/p/new" data-icon="&#xe044;">Add Project</a>
                 </button>
-                <% }) // End of projects.forEach;%>
-            <% } %>
-    </section>
-    <section class="greybox">
-    <h5>Recent Activity</h5>
-    <hr class="line"/>
-        <ul id="updateUl">
-        <% projects.reverse().forEach(function(project){ %>
-            <% project.updates.forEach(function(update){ %>
-                    <li>
-                        <a href="/p/<%= project.id %>">
-                            <% if(update.name === name) {%>
-                                <span class="highlight">You</span>
-                            <%} else { %>
-                                <span class="highlight"><%= update.name %></span> 
-                            <% } %> 
-                            created a project workplace
-                            <span class="highlight"><%= update.projectName%></span>
-                        </a>
-                    </li>
-                    <div class="timeline"></div>
-            <% }); //End of updates.forEach %>
-        <% }); // End of projects.forEach  %>
-        </ul>
+            </div>
+            <hr class="line">
+                <% if(projects.length === 0){ %>
+                    <p>No projects have been added yet.</p>
+                <%}else{%>
+                    <% projects.forEach(function(project){ %>
+                    <button class="projLink">
+                        <a href="/p/<%= project._id%>" data-icon="&#xe024;"><%= project.title %></a>
+                    </button>
+                    <% }) // End of projects.forEach;%>
+                <% }; %>
+        </section>
+        <section class="greybox">
+        <h5>Recent Activity</h5>
+        <hr class="line"/>
+            <ul id="updateUl">
+            <% projects.reverse().forEach(function(project){ %>
+                <% project.updates.forEach( (update) =>{ %>
+                        <li>
+                            <a href="/p/<%= project.id %>">
+                                <% if(update.name === name) {%>
+                                    <span class="highlight">You</span>
+                                <%} else { %>
+                                    <span class="highlight"><%= update.name %></span> 
+                                <% } %> 
+                                created a project workplace
+                                <span class="highlight"><%= update.projectName%></span>
+                                
+                                <span class="highlight"><%= update.lastUpdated.date%></span>
+                            </a>
+                        </li> 
+                        <div class="timeline"></div>
+                <% }); //End of updates.forEach %>
+            <% }); // End of projects.forEach  %>
+            </ul>
+        </section>
     </section>
 </div>
 

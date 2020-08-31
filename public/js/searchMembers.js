@@ -5,7 +5,7 @@ let submitBtn = document.getElementsByClassName("submit");
 function addMember() {
   let memForm = document.getElementById("newMembers");
   for (var i = 0; i < list.length; i++) {
-    list[i].addEventListener("click", function() {
+    list[i].addEventListener("click", function () {
       let memId = this.getAttribute("data-memId"); // member Id from data Attribute
       let memProImg = this.getAttribute("data-img");
       let newName = this.textContent; //innerHtml (name)
@@ -29,7 +29,7 @@ function addMember() {
 }
 
 //--------------
-var showResults = debounce(function(arg) {
+var showResults = debounce(function (arg) {
   var value = arg.trim();
   var membersList = $("#membersList");
   var popup = $("#memberPopup");
@@ -42,16 +42,16 @@ var showResults = debounce(function(arg) {
   } else {
     popup.fadeIn();
   }
-  var jqxhr = $.get("/p/search?q=" + value, function(data) {
+  var jqxhr = $.get("/p/search?q=" + value, function (data) {
     membersList.html("");
   })
-    .done(function(data) {
+    .done(function (data) {
       if (data.length === 0) {
         membersList.append(
           "<span>No members found with ' " + value + " ' </span>"
         );
       } else {
-        data.forEach(x => {
+        data.forEach((x) => {
           console.log(x);
           var outputHTML =
             "<li class='lis' data-img='" +
@@ -70,17 +70,17 @@ var showResults = debounce(function(arg) {
       }
       input.removeClass("loading");
     })
-    .fail(function(err) {
+    .fail(function (err) {
       console.log(err);
     });
-}, 200);
+}, 350); // debounce data every 350ms from each 2 keystrokes
 
 function debounce(func, wait, immediate) {
   var timeout;
-  return function() {
+  return function () {
     var context = this;
     args = arguments;
-    var later = function() {
+    var later = function () {
       timeout = null;
       if (!immediate) func.apply(context, args);
     };

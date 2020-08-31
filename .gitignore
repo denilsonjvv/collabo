@@ -1,2 +1,3 @@
 /Prototype/*
 node_modules/
+.env
