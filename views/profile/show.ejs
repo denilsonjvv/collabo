@@ -1,28 +1,25 @@
 <% include ../partials/header %>
-
 <% include ../partials/messages %>
 
-
 <div class="pro-container">
-    <div class="wrap">
-        <div class="profile-head">
-            <div class="left-hold">
-                <div class="img-hold">
-                    <img src="/pro-img/<%= currentUser.profileImg %>">
-                </div>
-                <a class="btn btn-primary btn-sm" href="/profile/<%= currentUser.id %>/edit">Edit Profile</a>
-            </div>
-            <div class="info-hold">
-                <h3>
-                <%= currentUser.name %>
-                </h3>
-                <hr class="line"/>
-                <p><b>Email: </b><%= currentUser.email %></p>
-                <p><b>Registered Since: </b><%= currentUser.date.toDateString() %></p>
-
-            </div>
+  <div class="wrap">
+    <div class="profile-head">
+      <div class="left-hold">
+        <div class="img-hold">
+          <img src="/pro-img/<%= currentUser.profileImg %>">
         </div>
+        <a class="btn btn-primary btn-sm" href="/profile/<%= currentUser.id %>/edit">Edit Profile</a>
+      </div>
+      <div class="info-hold">
+        <h3>
+          <%= currentUser.name %>
+        </h3>
+        <hr class="line"/>
+        <p><b>Email: </b><%= currentUser.email %></p>
+        <p><b>Registered Since: </b><%= currentUser.date.toDateString() %></p>
+      </div>
     </div>
+  </div>
 </div>
 
-<%  include ../partials/footer %>
+<% include ../partials/footer %>

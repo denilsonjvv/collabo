@@ -7,7 +7,7 @@ function ranNum(min, max) {
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusiv
 }
 generateDefaultAvatar();
-ranBtn.addEventListener("click", function() {
+ranBtn.addEventListener("click", function () {
   generateDefaultAvatar();
 });
 function generateDefaultAvatar() {

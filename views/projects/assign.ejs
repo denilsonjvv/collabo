@@ -2,22 +2,22 @@
 
 <div class="container">
   <div class="greybox">
-		<h4>Project <span class="highlight"><%=project.title %></span></h4>
+    <h4>Project <span class="highlight"><%= project.title %></span></h4>
     <hr class="line">
-		<form>
-			<p>Search and select member from dropdown</p>
-			<input type="text" id="assign" onkeyup="showResults(this.value)" placeholder="Search members" autofocus>
-			<div id="memberPopup">
-				<ul id="membersList">
-				</ul>
-			</div>
-		</form>
+    <form>
+      <p>Search and select member from dropdown</p>
+      <input type="text" id="assign" onkeyup="showResults(this.value)" placeholder="Search members" autofocus>
+      <div id="memberPopup">
+        <ul id="membersList">
+        </ul>
+      </div>
+    </form>
   </div>
-	<div class="greybox">
-		<h4>Members List</h4>
-		<form action="/p/<%= project.id %>/assign" method="POST" id="newMembers">
-		</form>
-	</div>
+  <div class="greybox">
+    <h4>Members List</h4>
+    <form action="/p/<%= project.id %>/assign" method="POST" id="newMembers">
+    </form>
+  </div>
 </div>
 <script src="/js/searchMembers.js"></script>
 <% include ../partials/footer %>

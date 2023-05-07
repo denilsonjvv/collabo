@@ -4,7 +4,7 @@ let passport = require("passport"),
   User = require("../models/user");
 
 // AUTH ROUTES
-router.get("/login", function(req, res) {
+router.get("/login", function (req, res) {
   res.render("login");
 });
 
@@ -13,18 +13,18 @@ router.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/user/login",
-    failureFlash: true
+    failureFlash: true,
   }),
-  function(req, res) {}
+  function (req, res) {}
 );
 
 //Show register form
-router.get("/register", function(req, res) {
+router.get("/register", function (req, res) {
   res.render("register");
 });
 
 //Create new user
-router.post("/register", function(req, res) {
+router.post("/register", function (req, res) {
   var { name, profileImg, email, password, password2 } = req.body;
   let errors = [];
 
@@ -44,35 +44,42 @@ router.post("/register", function(req, res) {
     res.render("register", { errors, name, email, password, password2 });
   } else {
     //validate passed
-    User.findOne({ email: email }, function(err, user) {
+    User.findOne({ email: email }, function (err, user) {
       if (user) {
         //User exists
         errors.push({ msg: "Email is already registered" });
-        res.render("register", { errors, name, email, password, password2 });
+        res.render("register", {
+          errors,
+          name,
+          email,
+          password,
+          password2,
+        });
       } else {
         var userInfo = {
           name: name,
           profileImg: profileImg,
-          email: email
+          email: email,
         };
-        User.register(new User(userInfo), req.body.password, function(
-          err,
-          user
-        ) {
-          if (err) {
-            console.log(err);
-          } else {
-            req.flash("success_msg", "You are now registered and can log in");
-            res.redirect("login");
+        User.register(
+          new User(userInfo),
+          req.body.password,
+          function (err, user) {
+            if (err) {
+              console.log(err);
+            } else {
+              req.flash("success_msg", "You are now registered and can log in");
+              res.redirect("login");
+            }
           }
-        });
+        );
       }
     });
   }
 });
 
 //Logout Handler
-router.get("/logout", function(req, res) {
+router.get("/logout", function (req, res) {
   req.logout();
   req.flash("success_msg", "You are logged out");
   res.redirect("/user/login");

@@ -10,21 +10,21 @@ var taskSchema = new mongoose.Schema({
   createdby: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User" //Data from User model schema
+      ref: "User", //Data from User model schema
     },
     name: String,
-    profileImg: String
+    profileImg: String,
   },
   lastUpdated: {
     type: Date,
     format: "%Y-%m-%d%",
-    default: new Date()
+    default: new Date(),
   },
   date: {
     type: Date,
     format: "%Y-%m-%d%",
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Task", taskSchema); // Needed evertime we require mongoose

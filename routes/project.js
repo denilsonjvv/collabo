@@ -8,20 +8,20 @@ var Project = require("../models/project"),
   auth = require("../config/auth"); // connect to auth file to authorize.
 
 //Search Members route to Assign to Project
-router.get("/search", function(req, res, next) {
+router.get("/search", function (req, res, next) {
   var q = req.query.q;
   User.find(
     {
       name: {
         $regex: new RegExp(q),
-        $options: "$i"
-      }
+        $options: "$i",
+      },
     },
     {
-      __v: 0
+      __v: 0,
     },
-    function(err, data) {
-      data.forEach(function(x) {
+    function (err, data) {
+      data.forEach(function (x) {
         x.email = null;
         x.date = null; // TEMPORARY SOlUTION to exclude some user data!
       });
@@ -33,14 +33,14 @@ router.get("/search", function(req, res, next) {
 });
 
 //Show Post Form
-router.get("/new", auth.userIsLogged, function(req, res) {
+router.get("/new", auth.userIsLogged, function (req, res) {
   res.render("projects/new", { user: req.user });
 });
 //SHOW project page
-router.get("/:id", auth.userIsLogged, function(req, res) {
+router.get("/:id", auth.userIsLogged, function (req, res) {
   Project.findById(req.params.id)
     .populate("tasks")
-    .exec(function(err, foundProject) {
+    .exec(function (err, foundProject) {
       if (err) {
         res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
       } else {
@@ -49,30 +49,30 @@ router.get("/:id", auth.userIsLogged, function(req, res) {
     });
 });
 //CREATE new project
-router.post("/", auth.userIsLogged, function(req, res) {
+router.post("/", auth.userIsLogged, function (req, res) {
   var title = req.body.title;
   var description = req.body.description;
   var author = {
     id: req.user._id,
     name: req.user.name,
-    profileImg: req.user.profileImg
+    profileImg: req.user.profileImg,
   };
   var newProject = {
     title: title,
     description: description,
-    author: author
+    author: author,
   };
   //Create a new blog and save to database
-  Project.create(newProject, function(err, newProject) {
+  Project.create(newProject, function (err, newProject) {
     if (err) {
       console.log(err);
     } else {
       let newUpdate = {
         name: author.name,
         projectName: title,
-        projectId: newProject._id
+        projectId: newProject._id,
       };
-      Updates.create(newUpdate, function(err, newlyUpdated) {
+      Updates.create(newUpdate, function (err, newlyUpdated) {
         if (err) {
           console.log("Error uploading newTask error.");
         } else {
@@ -92,28 +92,33 @@ router.post("/", auth.userIsLogged, function(req, res) {
   });
 });
 //Assign users to project Page
-router.get("/:id/assign", auth.checkIfOwner, auth.userIsLogged, function(
-  req,
-  res
-) {
-  Project.findById(req.params.id, function(err, project) {
-    if (err) {
-      req.flash(
-        "info_msg",
-        "There was a problem accessing your project, try again."
-      );
-      res.redirect("/");
-    } else {
-      User.find({}, function(err, foundUsers) {
-        res.render("projects/assign", { project, users: foundUsers });
-      });
-    }
-  });
-});
+router.get(
+  "/:id/assign",
+  auth.checkIfOwner,
+  auth.userIsLogged,
+  function (req, res) {
+    Project.findById(req.params.id, function (err, project) {
+      if (err) {
+        req.flash(
+          "info_msg",
+          "There was a problem accessing your project, try again."
+        );
+        res.redirect("/");
+      } else {
+        User.find({}, function (err, foundUsers) {
+          res.render("projects/assign", {
+            project,
+            users: foundUsers,
+          });
+        });
+      }
+    });
+  }
+);
 //Add members to project route ** Needs Work And Attention **
-router.post("/:id/assign", auth.userIsLogged, function(req, res) {
+router.post("/:id/assign", auth.userIsLogged, function (req, res) {
   var memIds = req.body.members; //array of ids
-  User.find({ _id: memIds }, function(err, usersFound) {
+  User.find({ _id: memIds }, function (err, usersFound) {
     if (err) {
       console.log(err);
     } else {
@@ -121,7 +126,7 @@ router.post("/:id/assign", auth.userIsLogged, function(req, res) {
         req.params.id,
         { members: usersFound },
         { useFindAndModify: false },
-        function(err, updated) {
+        function (err, updated) {
           if (err) {
             req.flash(
               "info_msg",
@@ -139,72 +144,79 @@ router.post("/:id/assign", auth.userIsLogged, function(req, res) {
 });
 
 //Edit project page
-router.get("/:id/edit", auth.checkIfOwner, auth.userIsLogged, function(
-  req,
-  res
-) {
-  Project.findById(req.params.id, function(err, project) {
-    if (err) {
-      req.flash(
-        "info_msg",
-        "There was a problem accessing your project, try again."
-      );
-      res.redirect("/");
-    } else {
-      req.flash(
-        "success_msg",
-        "Your project page has been updated successfully."
-      );
-      res.render("projects/edit", { project });
-    }
-  });
-});
+router.get(
+  "/:id/edit",
+  auth.checkIfOwner,
+  auth.userIsLogged,
+  function (req, res) {
+    Project.findById(req.params.id, function (err, project) {
+      if (err) {
+        req.flash(
+          "info_msg",
+          "There was a problem accessing your project, try again."
+        );
+        res.redirect("/");
+      } else {
+        req.flash(
+          "success_msg",
+          "Your project page has been updated successfully."
+        );
+        res.render("projects/edit", { project });
+      }
+    });
+  }
+);
 //UPDATE project page
-router.put("/:id", auth.checkIfOwner, auth.userIsLogged, function(req, res) {
-  Project.findByIdAndUpdate(req.params.id, req.body.project, function(
-    err,
-    project
-  ) {
-    if (err) {
-      req.flash(
-        "info_msg",
-        "There was a problem updating your project, try again."
-      );
-      res.redirect("back");
-    } else {
-      res.redirect("/p/" + project._id);
+router.put("/:id", auth.checkIfOwner, auth.userIsLogged, function (req, res) {
+  Project.findByIdAndUpdate(
+    req.params.id,
+    req.body.project,
+    function (err, project) {
+      if (err) {
+        req.flash(
+          "info_msg",
+          "There was a problem updating your project, try again."
+        );
+        res.redirect("back");
+      } else {
+        res.redirect("/p/" + project._id);
+      }
     }
-  });
+  );
 });
 //DESTROY project page
-router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, function(
-  req,
-  res,
-  next
-) {
-  Project.findById(req.params.id, function(err, project) {
-    if (err) return next(err);
-    project.delete();
-    // Need to add flash message for deletion confirmation
-    res.redirect("/");
-  });
-});
+router.delete(
+  "/:id",
+  auth.userIsLogged,
+  auth.checkIfOwner,
+  function (req, res, next) {
+    Project.findById(req.params.id, function (err, project) {
+      if (err) return next(err);
+      project.delete();
+      // Need to add flash message for deletion confirmation
+      res.redirect("/");
+    });
+  }
+);
 
 // New task page
-router.get("/:id/newtask", auth.userIsLogged, function(req, res) {
-  Project.findById(req.params.id, function(err, foundProject) {
+router.get("/:id/newtask", auth.userIsLogged, function (req, res) {
+  Project.findById(req.params.id, function (err, foundProject) {
     if (err) {
       res.render("errors/project", { projectID: req.params.id });
     } else {
-      User.find({}, function(err, foundUsers) {
-        res.render("tasks/new", { project: foundProject, user: foundUsers });
+      User.find({}, function (err, foundUsers) {
+        res.render("tasks/new", {
+          project: foundProject,
+          user: foundUsers,
+        });
       });
     }
   });
 });
 
 // Create new task
-router.post("/:id", auth.userIsLogged, function(req, res) {
+router.post("/:id", auth.userIsLogged, function (req, res) {
   var task = req.body.task;
   var assigned = req.body.assigned;
   var priority = req.body.priority;
@@ -212,21 +224,21 @@ router.post("/:id", auth.userIsLogged, function(req, res) {
   var createdby = {
     id: req.user._id,
     name: req.user.name,
-    profileImg: req.user.profileImg
+    profileImg: req.user.profileImg,
   };
   var newTask = {
     task: task,
     assigned: assigned,
     priority: priority,
     dueDate: dueDate,
-    createdby: createdby
+    createdby: createdby,
   };
-  Project.findById(req.params.id, function(err, foundProject) {
+  Project.findById(req.params.id, function (err, foundProject) {
     if (err) {
       console.log("project ID not found error.");
       res.redirect("/");
     } else {
-      Task.create(newTask, function(err, foundTask) {
+      Task.create(newTask, function (err, foundTask) {
         if (err) {
           console.log("Task not found error.");
         } else {
@@ -240,8 +252,8 @@ router.post("/:id", auth.userIsLogged, function(req, res) {
   });
 });
 //Edit task page
-router.get("/:proj_id/:task_id/edit", function(req, res) {
-  Project.findById(req.params.proj_id, function(err, project) {
+router.get("/:proj_id/:task_id/edit", function (req, res) {
+  Project.findById(req.params.proj_id, function (err, project) {
     if (err) {
       req.flash(
         "info_msg",
@@ -249,11 +261,15 @@ router.get("/:proj_id/:task_id/edit", function(req, res) {
       );
       res.redirect("/");
     } else {
-      Task.findById(req.params.task_id, function(err, task) {
+      Task.findById(req.params.task_id, function (err, task) {
         if (err) {
         } else {
-          User.find({}, function(err, foundUsers) {
-            res.render("tasks/edit", { task, project, user: foundUsers });
+          User.find({}, function (err, foundUsers) {
+            res.render("tasks/edit", {
+              task,
+              project,
+              user: foundUsers,
+            });
           });
         }
       });
@@ -261,14 +277,14 @@ router.get("/:proj_id/:task_id/edit", function(req, res) {
   });
 });
 //DELETE task
-router.delete("/:proj_id/:task_id", function(req, res, next) {
-  Project.findById(req.params.proj_id, function(err, foundProject) {
+router.delete("/:proj_id/:task_id", function (req, res, next) {
+  Project.findById(req.params.proj_id, function (err, foundProject) {
     if (err) {
       console.log("project ID not found error.");
       res.redirect("/");
     } else {
       //findbyIDandRemove
-      Task.findById(req.params.task_id, function(err, foundTask) {
+      Task.findById(req.params.task_id, function (err, foundTask) {
         if (err) {
           // error handler needed
           res.redirect("back");

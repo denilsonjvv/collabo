@@ -1,24 +1,24 @@
 <% include partials/header %>
 
 <div class="container">
-      <% include ./partials/messages %>
-      <h1>collabO - <span style="color: var(--blue)">Login</span></h1>
+  <% include ./partials/messages %>
+  <h1>collabO - <span style="color: var(--blue)">Login</span></h1>
   <div class="greybox">
-      <form action="/user/login" method="POST">
-        <div class="block">
-          <label for="email">Email</label>
-          <input type="text"  id="email"  name="username"  class="form-control"  placeholder="Enter Email"/>
-        </div>
-        <div class="block">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
-        </div>
-        <button type="submit" class="submitBtn btnlink">Login</button>
-      </form>
-      <p>
-        No Account? <a href="/user/register">Register</a>
-      </p>
-  </div> 
+    <form action="/user/login" method="POST">
+      <div class="block">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="username" class="form-control" placeholder="Enter Email"/>
+      </div>
+      <div class="block">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"/>
+      </div>
+      <button type="submit" class="submitBtn btnlink">Login</button>
+    </form>
+    <p>
+      No Account? <a href="/user/register">Register</a>
+    </p>
+  </div>
 </div>
 
 <% include partials/footer %>

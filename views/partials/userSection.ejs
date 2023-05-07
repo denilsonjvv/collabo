@@ -7,18 +7,18 @@
   </div>
   <hr class="line"/>
   <div class="proNameHolder">
-  <h5>Your Projects</h5>
+    <h5>Your Projects</h5>
     <% currentUserProjects.forEach(function(project){ %>
-    <p>
-      <a href="/p/<%= project.id %>" class="mauto"><%= project.title %></a>
-    </p>
-    <% });%>
-  <hr class="line"/>
-  <h5>All Projects</h5>
-  <% allProjects.forEach(function(project){ %>
-    <p>
-      <a href="/p/<%= project.id %>" class="mauto"><%= project.title %></a>
-    </p>
-  <% }); %>
+      <p>
+        <a href="/p/<%= project.id %>" class="mauto"><%= project.title %></a>
+      </p>
+    <% }); %>
+    <hr class="line"/>
+    <h5>All Projects</h5>
+    <% allProjects.forEach(function(project){ %>
+      <p>
+        <a href="/p/<%= project.id %>" class="mauto"><%= project.title %></a>
+      </p>
+    <% }); %>
   </div>
 </section>

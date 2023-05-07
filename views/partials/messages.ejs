@@ -1,31 +1,31 @@
-<% if(typeof errors != 'undefined' ) {%>
-    <% errors.forEach(function(error){ %>
+<% if(typeof errors != "undefined" ) { %>
+  <% errors.forEach(function(error){ %>
     <div class="msg err_msg">
-        <%= error.msg %>
+      <%= error.msg; %>
     </div>
-    <% }); %>
+  <% }); %>
 <% } %>
 
-<% if(success_msg != '') {%>
-    <div class="msg suc_msg">
-        <%= success_msg %>
-    </div>
+<% if(success_msg != "") { %>
+  <div class="msg suc_msg">
+    <%= success_msg; %>
+  </div>
 <% } %>
- 
-<% if(error_msg != '') {%>
-    <div class="msg err_msg">
-        <%= error_msg %>
-    </div>
+
+<% if(error_msg != "") { %>
+  <div class="msg err_msg">
+    <%= error_msg; %>
+  </div>
 <% } %>
-<% if(info_msg != '') {%>
-    <div class="msg info_msg">
-        <%= info_msg %>
-    </div>
+<% if(info_msg != "") { %>
+  <div class="msg info_msg">
+    <%= info_msg; %>
+  </div>
 <% } %>
-<% if(error != '') {%>
-    <div class="msg err_msg">
-        <%= error %>
-    </div>
+<% if(error != "") { %>
+  <div class="msg err_msg">
+    <%= error; %>
+  </div>
 <% } %>
 
 

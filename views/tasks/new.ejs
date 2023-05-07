@@ -3,43 +3,43 @@
 <div class="container">
   <% include ../partials/messages %>
   <div class="greybox">
-      <%  //check if there are any tasks
-      let mytasks = project.tasks[0];
-      if(mytasks === undefined){ %>
-        <h4>Add your first task to project <span class="highlight"><%= project.title %></span>!</h4>
-      <% }else { %>
-        <h3>New task in <span class="highlight"><%= project.title %></h3>
-      <% } %>
+    <% //check if there are any tasks
+    let mytasks = project.tasks[0];
+    if(mytasks === undefined){ %>
+      <h4>Add your first task to project <span class="highlight"><%= project.title %></span>!</h4>
+    <% }else { %>
+      <h3>New task in <span class="highlight"><%= project.title %></h3>
+    <% } %>
     <hr class="line">
     <form action="/p/<%= project._id %>" method="POST">
       <div class="block">
-          <label for="task">Task</label>
-          <textarea type="text" id="task" name="task" aria-describedby="task"></textarea>
+        <label for="task">Task</label>
+        <textarea type="text" id="task" name="task" aria-describedby="task"></textarea>
       </div>
       <hr class="line"/>
       <div class="block">
-          <label for="priority">Priority</label>
-          <select id="priority" name="priority">
-            <option value="Low" value="Low">Low</option>
-            <option value="Medium" value="Medium">Medium</option>
-            <option value="High" value="High">High</option>
-          </select>
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority">
+          <option value="Low" value="Low">Low</option>
+          <option value="Medium" value="Medium">Medium</option>
+          <option value="High" value="High">High</option>
+        </select>
       </div>
       <div class="block">
-          <label for="assigned">Assign To</label>
-          <% project.members.forEach(function(member){ %>
-            <input type="checkbox" id="assigned" name="assigned" value="<%= member.name %>" aria-describedby="assigned">
-                <img src="/pro-img/<%=member.profileImg%>"><%= member.name %>
-            </input><br>
-          <% }); %>
+        <label for="assigned">Assign To</label>
+        <% project.members.forEach(function(member){ %>
+          <input type="checkbox" id="assigned" name="assigned" value="<%= member.name %>" aria-describedby="assigned">
+          <img src="/pro-img/<%= member.profileImg %>"><%= member.name %>
+          </input><br>
+        <% }); %>
       </div>
       <div class="block">
-          <label for="dueDate">Due </label>
-          <input type="text" id="dueDate" name="dueDate">
+        <label for="dueDate">Due </label>
+        <input type="text" id="dueDate" name="dueDate">
       </div>
-        <%
-        if(mytasks === undefined){ 
-        %>
+      <%
+      if(mytasks === undefined){
+      %>
         <button class="btnlink submitBtn">Add And Continue</button>
       <% }else { %>
         <button class="btnlink submitBtn">Add new</button>

@@ -10,8 +10,8 @@ var updatesSchema = new mongoose.Schema({
   lastUpdated: {
     type: Date,
     format: "%Y-%m-%d%",
-    default: new Date()
-  }
+    default: new Date(),
+  },
 });
 
 module.exports = mongoose.model("Updates", updatesSchema); // Needed evertime we require mongoose
